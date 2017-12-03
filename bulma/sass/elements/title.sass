@@ -1,10 +1,12 @@
-$title-color: $white !default
+$title-color: $media-primary !default
+$title-font: $family-serif
 $title-size: $size-3 !default
 $title-weight: $weight-semibold !default
 $title-strong-color: inherit !default
 $title-strong-weight: inherit !default
 
-$subtitle-color: $media-primary !default
+$subtitle-font: $family-monospace
+$subtitle-color: $white !default
 $subtitle-size: $size-5 !default
 $subtitle-weight: $weight-normal !default
 $subtitle-strong-color: $text-light !default
@@ -22,6 +24,7 @@ $subtitle-strong-weight: $weight-semibold !default
 
 .title
   color: $title-color
+  font-family: $title-font
   font-size: $title-size
   font-weight: $title-weight
   line-height: 1.125
@@ -39,6 +42,7 @@ $subtitle-strong-weight: $weight-semibold !default
       font-size: $size
 
 .subtitle
+  font-family: $subtitle-font
   color: $subtitle-color
   font-size: $subtitle-size
   font-weight: $subtitle-weight
