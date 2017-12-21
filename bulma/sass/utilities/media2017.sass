@@ -14,6 +14,9 @@ section.intro
 
 section.media-menu
   font-family: $family-monospace
+  padding: 4.375rem 0
+  background: black
+
   .menuitem
     span
       display: block
@@ -23,3 +26,20 @@ section.media-menu
 
 .introspace
   margin-top: 8rem
+
+.navbar-fixed
+  top: 0
+  z-index: 80
+  position: fixed
+  width: 100%
+  padding: .75rem
+
+section.music
+  .music-card
+    border: 1px solid $media-primary
+    padding: 25px 35px
+
+.spacer
+  height: 165px
+  &.hide
+    display: none
