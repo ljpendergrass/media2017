@@ -13,11 +13,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="bulma/bulma.min.css">
     <link rel="stylesheet" href="css/style.min.css"> <!-- may not need -->
-    
-    <!-- Script zone -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
   </head>
   <body>
+  <div class="spacer hide"></div>
+  <div class="rotator-container">
+    <img src="img/SVG/alecwhitmore-circ.svg" alt="Alec Whitmore">
+  </div>
   <section class="intro">
     <div class="container">
       <p class="subtitle">
@@ -46,15 +48,45 @@
   </div>
   </section>
   <div class="introspace"></div>
-  <section class="media-menu">
+
+  <section class="media-menu" id="nav-bar">
     <div class="container">
-      <div class="columns">
-        <div class="menuitem column is-narrow"><span class="active">MUSIC</span></div>
-        <div class="menuitem column is-narrow"><span>FILM</span></div>
-        <div class="menuitem column is-narrow"><span>TELEVISION</span></div>
-        <div class="menuitem column is-narrow"><span>GAMES</span></div>
-      </div>
+      <ul class="columns">
+        <li class="menuitem column is-narrow"><span class="active">MUSIC</span></li>
+        <li class="menuitem column is-narrow"><span>FILM</span></li>
+        <li class="menuitem column is-narrow"><span>TELEVISION</span></li>
+        <li class="menuitem column is-narrow"><span>GAMES</span></li>
+      </ul>
     </div>
   </section>
+  <section>
+    <div class="container">
+
+    </div>
+  </section>
+  <section class="music">
+    <div class="container">
+      <ul class="columns is-multiline">
+        <li class="music-card column is-one-third">
+          <article class="columns">
+            <div class="column">
+              text
+            </div>
+            <div class="column">
+              <img class="album-img" src="http://via.placeholder.com/150" alt="">
+            </div>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <div style="height: 2000px;">
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+  <script src="js/media.js"></script>
   </body>
 </html>
