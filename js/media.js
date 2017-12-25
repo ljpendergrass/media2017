@@ -1,15 +1,30 @@
 $(document).ready(function() {
+  var menuAttached = false //defualt menu state
 
   $(window).scroll(function () {
-    var skipHeight = $(".month-bg").height();
-    if ($(window).scrollTop() > skipHeight) {
+
+    // set height of elements
+    var skipHeight = ($(".month-bg").height()) - ($("#nav-bar").outerHeight());
+
+    // logging
+    // console.log("Height .month-bg:" + ($(".month-bg").outerHeight()) + ", Height #nav-bar:" + ($("#nav-bar").outerHeight()));
+    // console.log("window scrolltop: " + $(window).scrollTop());
+
+    if (($(window).scrollTop() > skipHeight) && !menuAttached ) {
       $('#nav-bar').addClass('navbar-fixed');
       $('.spacer').removeClass('hide');
-    }
-    if ($(window).scrollTop() < (skipHeight - 1)) {
+
+      menuAttached = true; // report menu attached
+      // console.log("Menu attached");
+
+    };
+    if (($(window).scrollTop() < skipHeight + 1) && menuAttached ) {
       $('#nav-bar').removeClass('navbar-fixed');
       $('.spacer').addClass('hide');
-    }
+
+      menuAttached = false; // report menu attached
+      // console.log("Menu default");
+    };
   });
 });
 
