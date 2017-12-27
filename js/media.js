@@ -12,6 +12,7 @@ $(document).ready(function() {
 
     if (($(window).scrollTop() > skipHeight) && !menuAttached ) {
       $('#nav-bar').addClass('navbar-fixed');
+      $('.media-menu').addClass('attached');
       $('.spacer').removeClass('hide');
 
       menuAttached = true; // report menu attached
@@ -20,6 +21,8 @@ $(document).ready(function() {
     };
     if (($(window).scrollTop() < skipHeight + 1) && menuAttached ) {
       $('#nav-bar').removeClass('navbar-fixed');
+      $('.media-menu').removeClass('attached');
+
       $('.spacer').addClass('hide');
 
       menuAttached = false; // report menu attached
