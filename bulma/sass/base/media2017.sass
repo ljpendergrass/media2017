@@ -1,8 +1,10 @@
 
+.media-title-2
+  text-transform: uppercase
+  font-family: $family-monospace
+
 section.intro
   padding-top: 9.375rem
-  .subtitle
-    font-size: $size-7
   h1
     font-size: 4.625rem
   .month
@@ -62,3 +64,15 @@ section.music
 
 .post-menu
   margin-top: 5.5rem
+
+.name-tag
+  @extend .media-title-2
+  margin: .5rem 0
+  color: $media-primary
+
+.music
+  .introduction
+    margin-bottom: 3rem
+  h2
+    @extend .media-title-2
+    color: $media-primary
