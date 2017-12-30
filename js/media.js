@@ -35,18 +35,18 @@ $(document).ready(function() {
 // match month to img url
 // update bgimg of .month-bg
 var monthBgUrls = [
-'http://via.placeholder.com/2000x1000?text=January',
-'http://via.placeholder.com/2000x1000?text=February',
-'http://via.placeholder.com/2000x1000?text=March',
-'http://via.placeholder.com/2000x1000?text=April',
-'http://via.placeholder.com/2000x1000?text=May',
-'http://via.placeholder.com/2000x1000?text=June',
-'http://via.placeholder.com/2000x1000?text=July',
-'http://via.placeholder.com/2000x1000?text=August',
-'http://via.placeholder.com/2000x1000?text=September',
-'http://via.placeholder.com/2000x1000?text=October',
-'http://via.placeholder.com/2000x1000?text=November',
-'http://via.placeholder.com/2000x1000?text=December'
+'img/monthbg/monthbg-00.jpg',
+'img/monthbg/monthbg-01.jpg',
+'img/monthbg/monthbg-02.jpg',
+'img/monthbg/monthbg-03.jpg',
+'img/monthbg/monthbg-04.jpg',
+'img/monthbg/monthbg-05.jpg',
+'img/monthbg/monthbg-06.jpg',
+'img/monthbg/monthbg-07.jpg',
+'img/monthbg/monthbg-08.jpg',
+'img/monthbg/monthbg-09.jpg',
+'img/monthbg/monthbg-10.jpg',
+'img/monthbg/monthbg-11.jpg'
 ];
 
 function monthBgHover(monthIndex) {
