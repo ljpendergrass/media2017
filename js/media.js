@@ -1,32 +1,33 @@
 $(document).ready(function() {
-  var menuAttached = false //defualt menu state
+  var menuAttached = false, //defualt menu state
+      skipHeight = $("#nav-bar").position().top, // get height of nav bar in container
+      menuDetachHeight = $("#nav-bar").position().top + 1; // set default for reset
 
-  $(window).scroll(function () {
+  $(window).scroll(function() {
 
-    // set height of elements
-    var skipHeight = ($(".month-bg").height()) - ($("#nav-bar").outerHeight());
-
-    // logging
-    // console.log("Height .month-bg:" + ($(".month-bg").outerHeight()) + ", Height #nav-bar:" + ($("#nav-bar").outerHeight()));
     // console.log("window scrolltop: " + $(window).scrollTop());
 
     if (($(window).scrollTop() > skipHeight) && !menuAttached ) {
+      menuDetachHeight = $(window).scrollTop(); // Remember height of menu attach
+
       $('#nav-bar').addClass('navbar-fixed');
       $('.media-menu').addClass('attached');
       $('.spacer').removeClass('hide');
 
       menuAttached = true; // report menu attached
-      // console.log("Menu attached");
+      console.log("Menu attached");
 
     };
-    if (($(window).scrollTop() < skipHeight + 1) && menuAttached ) {
+    if (($(window).scrollTop() < menuDetachHeight) && menuAttached ) {
       $('#nav-bar').removeClass('navbar-fixed');
       $('.media-menu').removeClass('attached');
 
       $('.spacer').addClass('hide');
 
       menuAttached = false; // report menu attached
-      // console.log("Menu default");
+      console.log("Menu default");
+      skipHeight = $("#nav-bar").position().top; // get height of nav bar in container
+
     };
   });
 });
