@@ -14,18 +14,23 @@ $(document).ready(function() {
       $('.media-menu').addClass('attached');
       $('.spacer').removeClass('hide');
 
+
+      $('.rotator-container').addClass('menu-attached');
+
       menuAttached = true; // report menu attached
-      console.log("Menu attached");
+      // console.log("Menu attached");
 
     };
     if (($(window).scrollTop() < menuDetachHeight) && menuAttached ) {
       $('#nav-bar').removeClass('navbar-fixed');
       $('.media-menu').removeClass('attached');
-
       $('.spacer').addClass('hide');
 
+      $('.rotator-container').removeClass('menu-attached');
+
+
       menuAttached = false; // report menu attached
-      console.log("Menu default");
+      // console.log("Menu default");
       skipHeight = $("#nav-bar").position().top; // get height of nav bar in container
 
     };
