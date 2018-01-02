@@ -1,7 +1,11 @@
-
 .media-title-2
   text-transform: uppercase
   font-family: $family-monospace
+
+.media-title-3
+  text-transform: uppercase
+  font-family: $family-serif
+  font-weight: bold
 
 section.intro
   font-family: $family-monospace
@@ -63,16 +67,16 @@ section.music
     padding: 0 1rem
 
 .post-menu
-  margin-top: 5.5rem
+  margin-top: -5rem
 
-.name-tag
-  @extend .media-title-2
-  margin: .5rem 0
-  color: $media-primary
 
 .music
   .introduction
     margin-bottom: 3rem
   h2
+    @extend .media-title-3
+    color: $white
+  .subtitle
     @extend .media-title-2
+    margin: .5rem 0
     color: $media-primary
