@@ -1,11 +1,15 @@
 $(function(){
 
+  // vars
   var divHover = null,      // stickers util
       windowClick = false,  // stickers util
-//    <----------------------------------------------------------------------------------------->
+  //  <----------------------------------------------------------------------------------------->
       menuAttached = false,                                 // defualt menu state
       skipHeight = $("#nav-bar").position().top,            // get height of nav bar in container
       menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
+  // end init vars
+
+  // begin sticker logic
 
   $(window).mousedown(function(){ windowClick = true;   });
   $(window).mouseup(function(){   windowClick = false;  });
