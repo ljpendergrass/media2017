@@ -1,7 +1,40 @@
-$(document).ready(function() {
-  var menuAttached = false, //defualt menu state
-      skipHeight = $("#nav-bar").position().top, // get height of nav bar in container
-      menuDetachHeight = $("#nav-bar").position().top + 1; // set default for reset
+$(function(){
+
+  var divHover = null,      // stickers
+      windowClick = false,  // stickers
+
+      menuAttached = false,                                 //defualt menu state
+      skipHeight = $("#nav-bar").position().top,            // get height of nav bar in container
+      menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
+
+  $(window).mousedown(function(){
+    windowClick = true;
+  });
+
+  $(window).mouseup(function(){
+    windowClick = false;
+  });
+
+  $('.sticker').hover(function(){
+    if(divHover === null){
+      divHover = $(this);
+    }
+  }, function(){
+    if(windowClick === false){
+      divHover = null;
+      $(this).css('z-index', '0');
+    }
+  });
+
+  $(window).mousemove(function(e){
+    var areaOffsetY = $(".sticker-area").position().top - $(window).scrollTop(), // correct for combined Y difference of scroll + sticker area
+        areaOffsetX = $(".sticker-area").offset().left; // this offset corrects for X coord of sticker area
+    if(windowClick && (divHover != null)){
+      divHover.css({ top: (e.clientY - divHover.height() / 2) - areaOffsetY + 'px', left: (e.clientX - divHover.width() / 2) - areaOffsetX + 'px', position: 'absolute', zIndex: '1' });
+    }
+  });
+
+  // menu logic
 
   $(window).scroll(function() {
 
@@ -62,36 +95,3 @@ function monthBgHover(monthIndex) {
   var month = monthBgUrls[monthIndex];
   $(".month-bg").css('background-image',"url('" + month + "')");
 };
-
-
-var divHover = null,
-    windowClick = false;
-
-$(function(){
-  $(window).mousedown(function(){
-    windowClick = true;
-  });
-
-  $(window).mouseup(function(){
-    windowClick = false;
-  });
-
-  $('.sticker').hover(function(){
-    if(divHover === null){
-      divHover = $(this);
-    }
-  }, function(){
-    if(windowClick === false){
-      divHover = null;
-      $(this).css('z-index', '0');
-    }
-  });
-
-  $(window).mousemove(function(e){
-    var areaOffsetY = $(".sticker-area").position().top - $(window).scrollTop(), // correct for combined Y difference of scroll + sticker area
-        areaOffsetX = $(".sticker-area").offset().left; // this offset corrects for X coord of sticker area
-    if(windowClick && (divHover != null)){
-      divHover.css({ top: (e.clientY - divHover.height() / 2) - areaOffsetY + 'px', left: (e.clientX - divHover.width() / 2) - areaOffsetX + 'px', position: 'absolute', zIndex: '1' });
-    }
-  });
-})
