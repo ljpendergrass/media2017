@@ -1,19 +1,14 @@
 $(function(){
 
-  var divHover = null,      // stickers
-      windowClick = false,  // stickers
-
-      menuAttached = false,                                 //defualt menu state
+  var divHover = null,      // stickers util
+      windowClick = false,  // stickers util
+//    <----------------------------------------------------------------------------------------->
+      menuAttached = false,                                 // defualt menu state
       skipHeight = $("#nav-bar").position().top,            // get height of nav bar in container
       menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
 
-  $(window).mousedown(function(){
-    windowClick = true;
-  });
-
-  $(window).mouseup(function(){
-    windowClick = false;
-  });
+  $(window).mousedown(function(){ windowClick = true;   });
+  $(window).mouseup(function(){   windowClick = false;  });
 
   $('.sticker').hover(function(){
     if(divHover === null){
@@ -34,8 +29,9 @@ $(function(){
     }
   });
 
-  // menu logic
+  // end sticker logic
 
+  // begin menu logic
   $(window).scroll(function() {
 
     // console.log("window scrolltop: " + $(window).scrollTop());
@@ -68,8 +64,10 @@ $(function(){
 
     };
   });
+  // end menu logic
 });
 
+// begin monthbg logic
 // input a month (0-11)
 // match month to img url
 // update bgimg of .month-bg
@@ -95,3 +93,4 @@ function monthBgHover(monthIndex) {
   var month = monthBgUrls[monthIndex];
   $(".month-bg").css('background-image',"url('" + month + "')");
 };
+// end monthbg logic
