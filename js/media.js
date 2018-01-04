@@ -38,7 +38,10 @@ var windowClick = false;  // stickers util
 $(function(){
 
   // sticker positioning at load
-  placeStickers(".sticker-area-music");
+  placeStickers(".sticker-area-album");
+  placeStickers(".sticker-area-songs");
+  placeStickers(".sticker-area-films");
+
 
   // vars
   var menuAttached = false;                                 // defualt menu state
