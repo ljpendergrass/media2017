@@ -63,9 +63,9 @@ $(function(){
   });
 
   $(window).mousemove(function(e){
-    var areaOffsetY = $(".sticker-area-music").position().top - $(window).scrollTop(), // correct for combined Y difference of scroll + sticker area
-        areaOffsetX = $(".sticker-area-music").offset().left; // this offset corrects for X coord of sticker area
     if(windowClick && (divHover != null)){
+      var areaOffsetY = $(divHover).parent().position().top - $(window).scrollTop(); // correct for combined Y difference of scroll + sticker area
+      var areaOffsetX = $(divHover).parent().offset().left; // this offset corrects for X coord of sticker area
       divHover.css({ top: (e.clientY - divHover.height() / 2) - areaOffsetY + 'px', left: (e.clientX - divHover.width() / 2) - areaOffsetX + 'px', position: 'absolute', zIndex: '1' });
     }
   });
