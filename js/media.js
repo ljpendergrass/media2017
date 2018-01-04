@@ -1,4 +1,44 @@
+// begin svg place logic
+// input sticker section
+// get dimensions of sticker section
+// get children in section
+//
+// apply random X,Y and deg foreach sticker in section
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+};
+
+function placeStickers(section) {
+  var sectionXMax = $(section).width();
+  var sectionYMax = $(section).height();
+  var stickers    = $(section).children();
+  var div         = sectionYMax/(stickers.length);
+  var placeY      = 0;
+  var minAngle    = 0;
+  var maxAngle    = 360;
+
+  for (stickerIndiv of stickers) {
+    var stickerWidth  = $(stickerIndiv).width();
+    var stickerHeight = placeY;
+    var randomX   = getRandomInt(0, (sectionXMax - stickerWidth));
+    var randomY   = stickerHeight;
+    var randomDeg = getRandomInt(minAngle, maxAngle);
+    $(stickerIndiv).css({ top: randomY + "px", left: randomX + "px", transform: "rotate(" + randomDeg + "deg)"});
+    placeY += div;
+  };
+};
+
+// vars
+var divHover = null;     // stickers util
+var windowClick = false;  // stickers util
+
 $(function(){
+
+  // sticker positioning at load
+  placeStickers(".sticker-area-music");
 
   // vars
   var menuAttached = false;                                 // defualt menu state
