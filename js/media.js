@@ -62,6 +62,18 @@ function placeStickers(section, config, minAngle, maxAngle,) {
       i += 1;
     };
   };
+  if (config === "television"){
+    i = 6;
+    for (stickerIndiv of stickers) {
+      var stickerWidth  = $(stickerIndiv).width();
+      var randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4))); // offset X by a quarter of sticker size
+      var randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset Y by an even smaller amount
+      var randomDeg = getRandomInt(minAngle, maxAngle);
+      $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
+      placeY += div - 80;
+      i -= 1;
+    };
+  };
 
 };
 
@@ -75,6 +87,8 @@ $(function(){
   placeStickers(".sticker-area-album", "music", -60, 60);
   placeStickers(".sticker-area-songs", "music", -60, 60);
   placeStickers(".sticker-area-films", "film",  -10, 10);
+  placeStickers(".sticker-area-television", "television",  -10, 10);
+
 
 
   // vars
