@@ -11,23 +11,37 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 };
 
-function placeStickers(section) {
+
+
+
+function placeStickers(section, config, minAngle, maxAngle,) {
   var sectionXMax = $(section).width();
   var sectionYMax = $(section).height();
   var stickers    = $(section).children();
   var div         = sectionYMax/(stickers.length);
   var placeY      = 0;
-  var minAngle    = -100;
-  var maxAngle    = 100;
+  var placeXIndex = 0;
+  // var randOffset  = (getRandomInt(-($(stickers[0]).width()),($(stickers[0]).width())));
+
+  var musicConfig = [ // manual offsets
+    (($(stickers[0]).width())/5),
+    sectionXMax - (($(stickers[1]).width())*1.25),
+    (sectionXMax/2) - (($(stickers[2]).width())/2),
+    sectionXMax - (($(stickers[3]).width())*1.25),
+    (($(stickers[4]).width())/5),
+    (sectionXMax/2) - (($(stickers[5]).width())/2),
+    (($(stickers[6]).width())/5),
+    sectionXMax - (($(stickers[7]).width())*1.25)
+  ];
 
   for (stickerIndiv of stickers) {
     var stickerWidth  = $(stickerIndiv).width();
-    var stickerHeight = placeY;
-    var randomX   = getRandomInt(0, (sectionXMax - stickerWidth));
-    var randomY   = stickerHeight;
+    var randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4)));
+    var randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9)));
     var randomDeg = getRandomInt(minAngle, maxAngle);
-    $(stickerIndiv).css({ top: randomY + "px", left: randomX + "px", transform: "rotate(" + randomDeg + "deg)"});
-    placeY += div;
+    $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[placeXIndex] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
+    placeY += div - 80;
+    placeXIndex += 1;
   };
 };
 
@@ -38,9 +52,9 @@ var windowClick = false;  // stickers util
 $(function(){
 
   // sticker positioning at load
-  placeStickers(".sticker-area-album");
-  placeStickers(".sticker-area-songs");
-  placeStickers(".sticker-area-films");
+  placeStickers(".sticker-area-album", "music", -60, 60);
+  placeStickers(".sticker-area-songs", "music", -60, 60);
+  placeStickers(".sticker-area-films", "film",  -45, 45);
 
 
   // vars
