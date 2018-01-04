@@ -66,8 +66,12 @@ section.music
   .safety-padding
     padding: 0 1rem
 
-.post-menu
-  margin-top: -5rem
+.section-negative-margin
+  margin-top: -5rem !important
+
+
+.subsection
+  margin-top: 6rem !important
 
 
 .music
@@ -80,3 +84,29 @@ section.music
     @extend .media-title-2
     margin: .5rem 0
     color: $media-primary
+
+.transition
+  h1
+    font-family: $family-serif
+    font-weight: bold
+    color: white
+    font-size: 5rem
+    // margin-top: 7.5rem !important
+    margin-bottom: 1.5rem !important
+
+.films-container
+  background: $media-primary
+  padding-top: .1rem
+  margin-top: 13rem
+
+.films
+  background: $media-primary
+  .introduction
+    margin-bottom: 3rem
+  h2
+    @extend .media-title-3
+    color: $black
+  .subtitle
+    @extend .media-title-2
+    margin: .5rem 0
+    color: $black

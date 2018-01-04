@@ -2,8 +2,12 @@
   cursor: move
   position: absolute
   display: block
+  transform: rotate(0deg)
+  // TODO: below this is a band aid solution for the draggable <img> problem
+  &::selection
+    color: none
+    background: transparent
   img
-    // TODO: this is a band aid solution for the draggable <img> problem
     user-drag: none
     user-select: none
     -moz-user-select: none
@@ -13,12 +17,16 @@
 
 
 .sticker-area
-  min-height: 50vmax
+  min-height: 300vh
+  &.sticker-area-films
+    min-height: 450vh
 
-.sticker-song
-  &::selection
-    color: none
-    background: transparent
+.sticker-music
   width: 100%
-  max-width: 33vmax
-  min-width: 260px
+  max-width: 22vmax
+  min-width: 220px
+
+.sticker-film
+  width: 100%
+  max-width: 35vmax
+  min-width: 300px
