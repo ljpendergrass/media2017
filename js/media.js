@@ -20,7 +20,7 @@ function placeStickers(section, config, minAngle, maxAngle,) {
   var stickers    = $(section).children();
   var div         = sectionYMax/(stickers.length);
   var placeY      = 0;
-  var placeXIndex = 0;
+  var i = 0;
   // var randOffset  = (getRandomInt(-($(stickers[0]).width()),($(stickers[0]).width())));
 
   var musicConfig = [ // manual offsets
@@ -33,16 +33,36 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     (($(stickers[6]).width())/5),
     sectionXMax - (($(stickers[7]).width())*1.25)
   ];
-
-  for (stickerIndiv of stickers) {
-    var stickerWidth  = $(stickerIndiv).width();
-    var randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4)));
-    var randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9)));
-    var randomDeg = getRandomInt(minAngle, maxAngle);
-    $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[placeXIndex] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
-    placeY += div - 80;
-    placeXIndex += 1;
+  if (config === "music"){
+    for (stickerIndiv of stickers) {
+      var stickerWidth  = $(stickerIndiv).width();
+      var randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4))); // offset X by a quarter of sticker size
+      var randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset Y by an even smaller amount
+      var randomDeg = getRandomInt(minAngle, maxAngle);
+      $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
+      placeY += div - 80;
+      i += 1;
+    };
   };
+  if (config === "film"){
+    for (stickerIndiv of stickers) {
+      var stickerWidth  = $(stickerIndiv).width();
+      var randomOffsetX = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset X
+      // var randomOffsetY = (getRandomInt(0,(stickerWidth/10))); // offset Y, slight only downwards
+      var randomDeg = getRandomInt(minAngle, maxAngle);
+
+      if ((i === 0) || ((i%2) === 0)){
+        var alignX = 16;
+      } else {
+        var alignX = sectionXMax - $(stickerIndiv).width(); // alignment is right with 1/9th additional space
+      };
+
+      $(stickerIndiv).css({ top: placeY + "px", left: alignX + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
+      placeY += div;
+      i += 1;
+    };
+  };
+
 };
 
 // vars
@@ -54,7 +74,7 @@ $(function(){
   // sticker positioning at load
   placeStickers(".sticker-area-album", "music", -60, 60);
   placeStickers(".sticker-area-songs", "music", -60, 60);
-  placeStickers(".sticker-area-films", "film",  -45, 45);
+  placeStickers(".sticker-area-films", "film",  -10, 10);
 
 
   // vars
