@@ -17,8 +17,8 @@ function placeStickers(section) {
   var stickers    = $(section).children();
   var div         = sectionYMax/(stickers.length);
   var placeY      = 0;
-  var minAngle    = 0;
-  var maxAngle    = 360;
+  var minAngle    = -100;
+  var maxAngle    = 100;
 
   for (stickerIndiv of stickers) {
     var stickerWidth  = $(stickerIndiv).width();
