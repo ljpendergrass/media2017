@@ -97,16 +97,36 @@ section.music
 .films-container
   background: $media-primary
   padding-top: .1rem
+  padding-bottom: 5rem
   margin-top: 13rem
 
 .films
   background: $media-primary
   .introduction
     margin-bottom: 3rem
-  h2
-    @extend .media-title-3
-    color: $black
+    h2
+      @extend .media-title-3
+      color: $black
   .subtitle
     @extend .media-title-2
     margin: .5rem 0
     color: $black
+
+.television-container
+  background: $media-blue
+  padding-top: .1rem
+  padding-bottom: 5rem
+  min-height: 50vh
+
+.television
+  background: $media-blue
+  .introduction
+    margin-bottom: 3rem
+    h2
+      font-family: $family-serif
+      font-weight: bold
+      color: $white
+  .subtitle
+    @extend .media-title-2
+    margin: .5rem 0
+    color: $media-primary
