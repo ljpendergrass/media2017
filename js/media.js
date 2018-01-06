@@ -1,18 +1,9 @@
-// begin svg place logic
-// input sticker section
-// get dimensions of sticker section
-// get children in section
-//
-// apply random X,Y and deg foreach sticker in section
-
+// util
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 };
-
-
-
 
 function placeStickers(section, config, minAngle, maxAngle,) {
   var sectionXMax = $(section).width();
@@ -84,21 +75,17 @@ var divHover = null;     // stickers util
 var windowClick = false;  // stickers util
 
 $(function(){
-
   // sticker positioning at load
   placeStickers(".sticker-area-album", "music", -60, 60);
   placeStickers(".sticker-area-songs", "music", -60, 60);
   placeStickers(".sticker-area-films", "film",  -10, 10);
   placeStickers(".sticker-area-television", "television",  -10, 10);
 
-
-
-  // vars
-  var menuAttached = false;                                 // defualt menu state
+  // init doc ready vars
+  var menuAttached = false;                                 // defualt menu state (unattached)
   var  skipHeight = $("#nav-bar").position().top;            // get height of nav bar in container
   var  menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
   // end init vars
-
   // begin sticker logic
 
   $(window).mousedown(function(){ windowClick = true;   });
@@ -126,10 +113,7 @@ $(function(){
   // end sticker logic
 
   // begin menu logic
-  $(window).scroll(function() {
-
-    // console.log("window scrolltop: " + $(window).scrollTop());
-
+  function menuScroll() {
     if (($(window).scrollTop() > skipHeight) && !menuAttached ) {
       menuDetachHeight = $(window).scrollTop(); // Remember height of menu attach
 
@@ -155,10 +139,21 @@ $(function(){
       menuAttached = false; // report menu attached
       // console.log("Menu default");
       skipHeight = $("#nav-bar").position().top; // get height of nav bar in container
-
     };
-  });
+  };
+  // run menuScroll on window scroll
+  $(window).scroll(function() {
+    menuScroll();
   // end menu logic
+  });
+  // run menuScroll on page load if scrolled beyond detach height
+  if ($(window).scrollTop() > skipHeight ) {
+    menuScroll();
+    menuDetachHeight = $(".intro").outerHeight() + $(".introspace").outerHeight() // simulate menu height and override default menuScroll behavior as to avoid 'flicker'
+    // console.log($(".intro").outerHeight() + $(".introspace").outerHeight()); debug
+
+  };
+// end doc ready
 });
 
 // begin monthbg logic
