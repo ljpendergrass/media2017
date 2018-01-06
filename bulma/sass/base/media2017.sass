@@ -19,15 +19,24 @@ section.intro
       color: $media-green
 
 section.media-menu
+  &.default
   &.attached
     background: transparentize(black, 0)
+    border-bottom: 1px solid $media-primary
   &.films
     background: transparentize($media-primary, 0)
     color: black
+    border-bottom: 1px solid $black
     .menuitem
       span.active
         border-bottom: 1px solid $black
-  // &.television
+  &.television
+    background: transparentize($media-blue, 0)
+    color: $media-primary
+    border-bottom: 1px solid $media-primary
+    .menuitem
+      span.active
+        border-bottom: 1px solid $black
 
   // &.games
   font-family: $family-monospace

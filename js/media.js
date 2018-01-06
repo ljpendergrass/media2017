@@ -12,7 +12,6 @@ function placeStickers(section, config, minAngle, maxAngle,) {
   var div         = sectionYMax/(stickers.length);
   var placeY      = 0;
   var i = 0;
-  // var randOffset  = (getRandomInt(-($(stickers[0]).width()),($(stickers[0]).width())));
 
   var musicConfig = [ // manual offsets
     (($(stickers[0]).width())/5),
@@ -42,7 +41,6 @@ function placeStickers(section, config, minAngle, maxAngle,) {
       var stickerWidth  = $(stickerIndiv).width();
       var randomOffsetX = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset X
       var randomDeg = getRandomInt(minAngle, maxAngle);
-      // var randomOffsetY = (getRandomInt(0,(stickerWidth/10))); // offset Y, slight only downwards
 
       if ((i === 0) || ((i%2) === 0)){
         var alignX = 16;
@@ -80,14 +78,25 @@ $(function(){
   placeStickers(".sticker-area-songs", "music", -60, 60);
   placeStickers(".sticker-area-films", "film",  -10, 10);
   placeStickers(".sticker-area-television", "television",  -10, 10);
-
+  // end sticker positioning at load
   // init doc ready vars
   var menuAttached = false;                                 // defualt menu state (unattached)
   var  skipHeight = $("#nav-bar").position().top;            // get height of nav bar in container
   var  menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
+  var currentMenuStyle = "default";
+  var sections = [
+    ".films-container",
+    ".television-container"
+    // ".games-container"
+  ];
+  var sectionTops = [
+    $(sections[0]).offset().top, // films section
+    $(sections[1]).offset().top  //, television section
+    // $(".games-container").offset().top // games section TODO
+  ];
   // end init vars
-  // begin sticker logic
 
+  // begin sticker logic
   $(window).mousedown(function(){ windowClick = true;   });
   $(window).mouseup(function(){   windowClick = false;  });
 
@@ -109,8 +118,33 @@ $(function(){
       divHover.css({ top: (e.clientY - divHover.height() / 2) - areaOffsetY + 'px', left: (e.clientX - divHover.width() / 2) - areaOffsetX + 'px', position: 'absolute', zIndex: '1' });
     }
   });
-
   // end sticker logic
+
+  function menuStyler(section) {
+    // var topOffset = skipHeight; // offset for menu
+    var topOffset = 0; // TODO
+    switch (true) {
+      case ($(window).scrollTop() < (sectionTops[0] - topOffset)) && (currentMenuStyle != "default"):
+        $("#nav-bar").removeClass(currentMenuStyle);
+        currentMenuStyle = "default";
+        $("#nav-bar").addClass(currentMenuStyle);
+        // console.log("Menu style is default");
+        break;
+      case (($(window).scrollTop() > (sectionTops[0] - topOffset)) && (($(window).scrollTop()) < (sectionTops[1] - topOffset))) && (currentMenuStyle != "films"):
+        $("#nav-bar").removeClass(currentMenuStyle);
+        currentMenuStyle = "films";
+        $("#nav-bar").addClass(currentMenuStyle);
+        // console.log("Menu Style is Films");
+        break;
+      case ($(window).scrollTop() > (sectionTops[1] - topOffset)) && (currentMenuStyle != "television"):
+        $("#nav-bar").removeClass(currentMenuStyle);
+        currentMenuStyle = "television";
+        $("#nav-bar").addClass(currentMenuStyle);
+        currentMenuStyle = "television";
+        // console.log("Menu Style is Television");
+        break;
+    };
+  };
 
   // begin menu logic
   function menuScroll() {
@@ -120,7 +154,6 @@ $(function(){
       $("#nav-bar").addClass("navbar-fixed");
       $(".media-menu").addClass("attached");
       $(".spacer").removeClass("hide");
-
 
       $(".rotator-container").addClass("menu-attached");
 
@@ -135,15 +168,17 @@ $(function(){
 
       $(".rotator-container").removeClass("menu-attached");
 
-
       menuAttached = false; // report menu attached
       // console.log("Menu default");
       skipHeight = $("#nav-bar").position().top; // get height of nav bar in container
     };
+    // menu style update
+
   };
   // run menuScroll on window scroll
   $(window).scroll(function() {
     menuScroll();
+    menuStyler();
   // end menu logic
   });
   // run menuScroll on page load if scrolled beyond detach height
@@ -151,7 +186,7 @@ $(function(){
     menuScroll();
     menuDetachHeight = $(".intro").outerHeight() + $(".introspace").outerHeight() // simulate menu height and override default menuScroll behavior as to avoid 'flicker'
     // console.log($(".intro").outerHeight() + $(".introspace").outerHeight()); debug
-
+    menuStyler();
   };
 // end doc ready
 });
