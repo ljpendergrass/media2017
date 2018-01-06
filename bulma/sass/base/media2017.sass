@@ -93,6 +93,9 @@ section.music
     font-size: 5rem
     // margin-top: 7.5rem !important
     margin-bottom: 1.5rem !important
+    +mobile
+      line-height: 5rem
+      padding-top: 2rem
 
 .films-container
   background: $media-primary
@@ -130,3 +133,16 @@ section.music
     @extend .media-title-2
     margin: .5rem 0
     color: $media-primary
+
+.mentions
+  .title
+    font-family: $family-serif
+    font-weight: bold
+    &.movie-mentions
+      color: $black
+  .list
+    @extend .media-title-2
+    padding-top: 0
+    padding-bottom: 0
+    &.movie-mentions
+      color: $black
