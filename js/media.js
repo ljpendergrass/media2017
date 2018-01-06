@@ -23,9 +23,21 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     (($(stickers[6]).width())/5),
     sectionXMax - (($(stickers[7]).width())*1.25)
   ];
+  var gameConfig = [ // manual offsets
+    (sectionXMax/2) - (($(stickers[2]).width())/2), // C
+    32,                                             // L
+    sectionXMax - (($(stickers[1]).width())+32),    // R
+    (sectionXMax/2) - (($(stickers[2]).width())/2), // C
+    32,                                             // L
+    sectionXMax - (($(stickers[1]).width())+32),    // R
+    (sectionXMax/2) - (($(stickers[2]).width())/2), // C
+    32,                                             // L
+    sectionXMax - (($(stickers[1]).width())+32)     // R
+
+  ];
   if (config === "music"){
     var stickerOverlap = 100;
-    var div        = (sectionYMax - stickerOverlap)/(stickers.length);
+    var div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
       var randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4))); // offset X by a quarter of sticker size
@@ -54,15 +66,35 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     };
   };
   if (config === "television"){
-    i = 6;
+    var stickerOverlap = 230;
+    var div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
-      var randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4))); // offset X by a quarter of sticker size
-      var randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset Y by an even smaller amount
+      var randomOffsetX = (getRandomInt(-16,16)); // offset X by a quarter of sticker size
+      var randomOffsetY = (getRandomInt(-16,16)); // offset Y by an even smaller amount
       var randomDeg = getRandomInt(minAngle, maxAngle);
-      $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
-      placeY += div - 80;
-      i -= 1;
+      if (i === 6) {
+        $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[3] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
+      } else {
+        $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
+      };
+      placeY += div;
+      i += 1;
+    };
+  };
+  if (config === "game"){
+    var stickerOverlap = 200;
+    var div = (sectionYMax - stickerOverlap)/6;
+    for (stickerIndiv of stickers) {
+      var stickerWidth  = $(stickerIndiv).width();
+      var randomOffsetX = (getRandomInt(-16,16)); // offset X
+      var randomOffsetY = (getRandomInt(-16,16)); // offset Y
+      var randomDeg = getRandomInt(minAngle, maxAngle);
+      $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: gameConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
+      i += 1;
+      if (((i+1) % 3) != 0) {
+        placeY += div;
+      };
     };
   };
 
@@ -78,6 +110,8 @@ $(function(){
   placeStickers(".sticker-area-songs", "music", -60, 60);
   placeStickers(".sticker-area-films", "film",  -10, 10);
   placeStickers(".sticker-area-television", "television",  -10, 10);
+  placeStickers(".sticker-area-game", "game",  -10, 10);
+
   // end sticker positioning at load
   // init doc ready vars
   var menuAttached = false;                                 // defualt menu state (unattached)
