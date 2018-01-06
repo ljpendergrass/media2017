@@ -18,7 +18,12 @@
 
 .sticker-area
   min-height: 300vh
+  &.sticker-area-album, .sticker-area-songs
+    // height fudge in combination with sticker overlap set in JS
+    min-height: calc( 400vh - 1200px )
   &.sticker-area-films
+    min-height: 550vh
+  &.sticker-area-television
     min-height: 550vh
 
 .sticker-music

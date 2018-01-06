@@ -34,13 +34,15 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     sectionXMax - (($(stickers[7]).width())*1.25)
   ];
   if (config === "music"){
+    var stickerOverlap = 100;
+    var div        = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
       var randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4))); // offset X by a quarter of sticker size
       var randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset Y by an even smaller amount
       var randomDeg = getRandomInt(minAngle, maxAngle);
       $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
-      placeY += div - 80;
+      placeY += div;
       i += 1;
     };
   };
@@ -48,8 +50,8 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
       var randomOffsetX = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset X
-      // var randomOffsetY = (getRandomInt(0,(stickerWidth/10))); // offset Y, slight only downwards
       var randomDeg = getRandomInt(minAngle, maxAngle);
+      // var randomOffsetY = (getRandomInt(0,(stickerWidth/10))); // offset Y, slight only downwards
 
       if ((i === 0) || ((i%2) === 0)){
         var alignX = 16;
