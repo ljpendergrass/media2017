@@ -18,6 +18,15 @@ section.intro
     &:hover
       color: $media-green
 
+section.outro
+  font-family: $family-monospace
+  margin: 4rem 0
+  color: $media-primary
+  h2
+    text-transform: uppercase
+  h1
+    font-size: 8.5rem
+
 section.media-menu
   &.default
   &.attached
@@ -37,8 +46,14 @@ section.media-menu
     .menuitem
       span.active
         border-bottom: 1px solid $media-primary
+  &.game
+    background: transparentize($media-green, 0)
+    color: $media-blue
+    border-bottom: 1px solid $media-blue
+    .menuitem
+      span.active
+        border-bottom: 1px solid $media-blue
 
-  // &.games
   font-family: $family-monospace
   padding: 4.375rem 0
   background: black

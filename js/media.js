@@ -83,7 +83,7 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     };
   };
   if (config === "game"){
-    var stickerOverlap = 200;
+    var stickerOverlap = 150;
     var div = (sectionYMax - stickerOverlap)/6;
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
@@ -120,13 +120,13 @@ $(function(){
   var currentMenuStyle = "default";
   var sections = [
     ".films-container",
-    ".television-container"
-    // ".games-container"
+    ".television-container",
+    ".game-container"
   ];
   var sectionTops = [
     $(sections[0]).offset().top, // films section
-    $(sections[1]).offset().top  //, television section
-    // $(".games-container").offset().top // games section TODO
+    $(sections[1]).offset().top,  // television section
+    $(sections[2]).offset().top // games section
   ];
   // end init vars
 
@@ -170,12 +170,19 @@ $(function(){
         $("#nav-bar").addClass(currentMenuStyle);
         // console.log("Menu Style is Films");
         break;
-      case ($(window).scrollTop() > (sectionTops[1] - topOffset)) && (currentMenuStyle != "television"):
+        case (($(window).scrollTop() > (sectionTops[1] - topOffset)) && (($(window).scrollTop()) < (sectionTops[2] - topOffset))) && (currentMenuStyle != "television"):
         $("#nav-bar").removeClass(currentMenuStyle);
         currentMenuStyle = "television";
         $("#nav-bar").addClass(currentMenuStyle);
         currentMenuStyle = "television";
         // console.log("Menu Style is Television");
+        break;
+      case ($(window).scrollTop() > (sectionTops[2] - topOffset)) && (currentMenuStyle != "game"):
+        $("#nav-bar").removeClass(currentMenuStyle);
+        currentMenuStyle = "game";
+        $("#nav-bar").addClass(currentMenuStyle);
+        currentMenuStyle = "game";
+        // console.log("Menu Style is Game");
         break;
     };
   };
