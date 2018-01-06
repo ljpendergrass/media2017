@@ -15,7 +15,6 @@
     -webkit-user-select: none
     -ms-user-select: none
 
-
 .sticker-area
   min-height: 300vh
   &.sticker-area-album, .sticker-area-songs
@@ -24,7 +23,7 @@
   &.sticker-area-films
     min-height: 550vh
   &.sticker-area-television
-    min-height: 550vh
+    min-height: calc( 400vh - 900px )
 
 .sticker-music
   width: 100%
@@ -38,5 +37,10 @@
 
 .sticker-television
   width: 100%
-  max-width: 22vmax
+  max-width: 26vmax
+  min-width: 220px
+
+.sticker-game
+  width: 100%
+  max-width: 24vmax
   min-width: 220px

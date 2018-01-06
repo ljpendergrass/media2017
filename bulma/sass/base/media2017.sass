@@ -36,7 +36,7 @@ section.media-menu
     border-bottom: 1px solid $media-primary
     .menuitem
       span.active
-        border-bottom: 1px solid $black
+        border-bottom: 1px solid $media-primary
 
   // &.games
   font-family: $family-monospace
@@ -152,15 +152,43 @@ section.music
     margin: .5rem 0
     color: $media-primary
 
+.game-container
+  background: $media-green
+  padding-top: .1rem
+  padding-bottom: 5rem
+  min-height: 50vh
+
+.game
+  background: $media-green
+  .introduction
+    margin-bottom: 3rem
+    h2
+      font-family: $family-serif
+      font-weight: bold
+      color: $media-blue
+  .subtitle
+    @extend .media-title-2
+    margin: .5rem 0
+    color: $media-blue
+
 .mentions
   .title
     font-family: $family-serif
     font-weight: bold
     &.movie-mentions
       color: $black
+    &.television-mentions
+      color: white
+    &.game-mentions
+      color: $media-primary
   .list
     @extend .media-title-2
+    @extend .is-size-7
     padding-top: 0
     padding-bottom: 0
     &.movie-mentions
       color: $black
+    &.television-mentions
+      color: $media-primary
+    &.game-mentions
+      color: $media-blue
