@@ -3,6 +3,7 @@
   position: absolute
   display: block
   transform: rotate(0deg)
+  transition: max-width .25s, min-width .25s
   // TODO: below this is a band aid solution for the draggable <img> problem
   &::selection
     color: none
@@ -21,7 +22,7 @@
     // height fudge in combination with sticker overlap set in JS
     min-height: calc( 400vh - 1200px )
   &.sticker-area-films
-    min-height: 550vh
+    min-height: calc( 550vh - 800px )
   &.sticker-area-television
     min-height: calc( 400vh - 900px )
   &.sticker-area-game
@@ -29,20 +30,26 @@
 
 .sticker-music
   width: 100%
-  max-width: 22vmax
-  min-width: 220px
+  max-width: calc(22vmax - 50px)
+  min-width: 300px
 
 .sticker-film
   width: 100%
-  max-width: 32vmax
-  min-width: 300px
+  max-width: calc(32vmax - 50px)
+  min-width: 380px
+  +tablet
+    max-width: calc(40vmax - 32px)
+  +desktop
+    max-width: calc(30vmax - 50px)
+    min-width: 450px
+
 
 .sticker-television
   width: 100%
-  max-width: 26vmax
-  min-width: 220px
+  max-width: calc(26vmax - 50px)
+  min-width: 300px
 
 .sticker-game
   width: 100%
-  max-width: 25vmax
-  min-width: 220px
+  max-width: calc(25vmax - 50px)
+  min-width: 300px
