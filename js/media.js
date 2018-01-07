@@ -9,7 +9,7 @@ function placeStickers(section, config, minAngle, maxAngle,) {
   var sectionXMax = $(section).width();
   var sectionYMax = $(section).height();
   var stickers    = $(section).children();
-  var div         = sectionYMax/(stickers.length);
+  var div         = sectionYMax/(stickers.length); //default, may not need
   var placeY      = 0;
   var i = 0;
 
@@ -49,6 +49,8 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     };
   };
   if (config === "film"){
+    var stickerOverlap = 400;
+    var div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
       var randomOffsetX = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset X
@@ -124,9 +126,9 @@ $(function(){
     ".game-container"
   ];
   var sectionTops = [
-    $(sections[0]).offset().top, // films section
-    $(sections[1]).offset().top,  // television section
-    $(sections[2]).offset().top // games section
+    $(sections[0]).position().top, // films section
+    $(sections[1]).position().top,  // television section
+    $(sections[2]).position().top // games section
   ];
   // end init vars
 
