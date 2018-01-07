@@ -5,7 +5,7 @@
   position: fixed
   padding: .75rem
   transition: all .5s
-  img
+  img, svg, rotato
     width: 150px
     height: 150px
     animation: rotate 5s linear infinite
@@ -13,9 +13,24 @@
 
 .menu-attached
   padding: 1rem
-  img
+  img, svg, rotato
     width: 100px
     height: 100px
+
+.films
+  background: transparent
+  .cls-1
+    fill: black
+.television
+  background: transparent
+  .cls-1
+    fill: $media-primary
+.game
+  background: transparent
+  .cls-1
+    fill: $media-blue
+
+
 
 @keyframes rotate
   0%

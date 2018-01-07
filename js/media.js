@@ -115,8 +115,8 @@ $(function(){
   // end sticker positioning at load
   // init doc ready vars
   var menuAttached = false;                                 // defualt menu state (unattached)
-  var  skipHeight = $("#nav-bar").position().top;            // get height of nav bar in container
-  var  menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
+  var skipHeight = $("#nav-bar").position().top;            // get height of nav bar in container
+  var menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
   var currentMenuStyle = "default";
   var sections = [
     ".films-container",
@@ -155,32 +155,40 @@ $(function(){
   // end sticker logic
 
   function menuStyler(section) {
-    // var topOffset = skipHeight; // offset for menu
-    var topOffset = 0; // TODO
+    var topOffset = $("#nav-bar").outerHeight(); // offset for menu
+    // var topOffset = 0; // TODO
     switch (true) {
       case ($(window).scrollTop() < (sectionTops[0] - topOffset)) && (currentMenuStyle != "default"):
         $("#nav-bar").removeClass(currentMenuStyle);
+        $("#Layer_1").removeClass(currentMenuStyle);
         currentMenuStyle = "default";
         $("#nav-bar").addClass(currentMenuStyle);
+        $("#Layer_1").addClass(currentMenuStyle);
         // console.log("Menu style is default");
         break;
       case (($(window).scrollTop() > (sectionTops[0] - topOffset)) && (($(window).scrollTop()) < (sectionTops[1] - topOffset))) && (currentMenuStyle != "films"):
         $("#nav-bar").removeClass(currentMenuStyle);
+        $("#Layer_1").removeClass(currentMenuStyle);
         currentMenuStyle = "films";
         $("#nav-bar").addClass(currentMenuStyle);
+        $("#Layer_1").addClass(currentMenuStyle);
         // console.log("Menu Style is Films");
         break;
         case (($(window).scrollTop() > (sectionTops[1] - topOffset)) && (($(window).scrollTop()) < (sectionTops[2] - topOffset))) && (currentMenuStyle != "television"):
         $("#nav-bar").removeClass(currentMenuStyle);
+        $("#Layer_1").removeClass(currentMenuStyle);
         currentMenuStyle = "television";
         $("#nav-bar").addClass(currentMenuStyle);
+        $("#Layer_1").addClass(currentMenuStyle);
         currentMenuStyle = "television";
         // console.log("Menu Style is Television");
         break;
       case ($(window).scrollTop() > (sectionTops[2] - topOffset)) && (currentMenuStyle != "game"):
         $("#nav-bar").removeClass(currentMenuStyle);
+        $("#Layer_1").removeClass(currentMenuStyle);
         currentMenuStyle = "game";
         $("#nav-bar").addClass(currentMenuStyle);
+        $("#Layer_1").addClass(currentMenuStyle);
         currentMenuStyle = "game";
         // console.log("Menu Style is Game");
         break;
