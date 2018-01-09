@@ -1,18 +1,55 @@
-// util
+// Globalvars ------------------------------------------------------------------
+var divHover = null;     // stickers util
+var windowClick = false;  // stickers util
+var menuAttached;
+var skipHeight;
+var menuDetachHeight;
+var currentMenuStyle;
+var sections = [];
+var sectionTops = [];
+var menuClick;
+var monthBgUrls = [
+"img/monthbg/monthbg-00.jpg",
+"img/monthbg/monthbg-01.jpg",
+"img/monthbg/monthbg-02.jpg",
+"img/monthbg/monthbg-03.jpg",
+"img/monthbg/monthbg-04.jpg",
+"img/monthbg/monthbg-05.jpg",
+"img/monthbg/monthbg-06.jpg",
+"img/monthbg/monthbg-07.jpg",
+"img/monthbg/monthbg-08.jpg",
+"img/monthbg/monthbg-09.jpg",
+"img/monthbg/monthbg-10.jpg",
+"img/monthbg/monthbg-11.jpg"
+];
+// End Globalvars
+
+
+// Functions -------------------------------------------------------------------
+
+// util ------------------------------------------------------------------------
+// Random Int
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-};
+}
+// end random int
 
-function placeStickers(section, config, minAngle, maxAngle,) {
+// Month hover event
+function monthBgHover(monthIndex) {
+  var month = monthBgUrls[monthIndex];
+  $(".month-bg").css("background-image","url('" + month + "')");
+}
+// end util
+
+// Spawn stickers function -----------------------------------------------------
+function placeStickers(section, config, minAngle, maxAngle) {
+  var i           = 0;
+  var placeY      = 0;
   var sectionXMax = $(section).width();
   var sectionYMax = $(section).height();
   var stickers    = $(section).children();
-  var div         = sectionYMax/(stickers.length); //default, may not need
-  var placeY      = 0;
-  var i = 0;
-
   var musicConfig = [ // manual offsets
     (($(stickers[0]).width())/5),
     sectionXMax - (($(stickers[1]).width())*1.25),
@@ -24,17 +61,17 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     sectionXMax - (($(stickers[7]).width())*1.25)
   ];
   var gameConfig = [ // manual offsets
-    (sectionXMax/2) - (($(stickers[2]).width())/2), // C
-    32,                                             // L
-    sectionXMax - (($(stickers[1]).width())+32),    // R
+    (sectionXMax/2) - (($(stickers[2]).width())/2), // Center
+    32,                                             // Left
+    sectionXMax - (($(stickers[1]).width())+32),    // Right
     (sectionXMax/2) - (($(stickers[2]).width())/2), // C
     32,                                             // L
     sectionXMax - (($(stickers[1]).width())+32),    // R
     (sectionXMax/2) - (($(stickers[2]).width())/2), // C
     32,                                             // L
     sectionXMax - (($(stickers[1]).width())+32)     // R
-
   ];
+
   if (config === "music"){
     var stickerOverlap = 100;
     var div = (sectionYMax - stickerOverlap)/(stickers.length);
@@ -54,7 +91,7 @@ function placeStickers(section, config, minAngle, maxAngle,) {
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
       var randomOffsetX = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset X
-      var randomDeg = getRandomInt(minAngle, maxAngle);
+      var randomDeg     = getRandomInt(minAngle, maxAngle);
 
       if ((i === 0) || ((i%2) === 0)){
         var alignX = 16;
@@ -98,45 +135,120 @@ function placeStickers(section, config, minAngle, maxAngle,) {
         placeY += div;
       };
     };
-  };
-
+  }
 };
+// end spawn stickers function
 
-// vars
-var divHover = null;     // stickers util
-var windowClick = false;  // stickers util
+// Menu Scroll Function --------------------------------------------------------
+function menuScroll() {
+  if (($(window).scrollTop() > skipHeight) && !menuAttached ) { // attach menu
+    menuDetachHeight = $(".intro").outerHeight() + $(".introspace").outerHeight() // simulate menu height in order to avoid nasty things caused by selecting window scroll
 
+    $("#nav-bar").addClass("navbar-fixed");
+    $(".media-menu").addClass("attached");
+    $(".spacer").removeClass("hide");
+
+    $(".rotator-container").addClass("menu-attached");
+
+    menuAttached = true; // report menu attached
+    // console.log("Menu attached");
+
+  };
+  if (($(window).scrollTop() < menuDetachHeight) && menuAttached ) { // detach menu
+    $("#nav-bar").removeClass("navbar-fixed");
+    $(".media-menu").removeClass("attached");
+    $(".spacer").addClass("hide");
+
+    $(".rotator-container").removeClass("menu-attached");
+
+    menuAttached = false; // report menu unattached
+    // console.log("Menu default");
+    skipHeight = $("#nav-bar").position().top; // get height of nav bar in container
+  };
+  // menu style update
+}
+// End Menu scroll
+
+// Menustyler
+function menuStyler(section) {
+  var topOffset = $("#nav-bar").outerHeight(); // offset for menu
+  // var topOffset = 0; // TODO
+  switch (true) {
+    case ($(window).scrollTop() < (sectionTops[0] - topOffset)) && (currentMenuStyle != "default"):
+      $("#nav-bar").removeClass(currentMenuStyle);
+      $("#Layer_1").removeClass(currentMenuStyle);
+      currentMenuStyle = "default";
+      $("#nav-bar").addClass(currentMenuStyle);
+      $("#Layer_1").addClass(currentMenuStyle);
+      // console.log("Menu style is default");
+      break;
+    case (($(window).scrollTop() > (sectionTops[0] - topOffset)) && (($(window).scrollTop()) < (sectionTops[1] - topOffset))) && (currentMenuStyle != "films"):
+      $("#nav-bar").removeClass(currentMenuStyle);
+      $("#Layer_1").removeClass(currentMenuStyle);
+      currentMenuStyle = "films";
+      $("#nav-bar").addClass(currentMenuStyle);
+      $("#Layer_1").addClass(currentMenuStyle);
+      // console.log("Menu Style is Films");
+      break;
+      case (($(window).scrollTop() > (sectionTops[1] - topOffset)) && (($(window).scrollTop()) < (sectionTops[2] - topOffset))) && (currentMenuStyle != "television"):
+      $("#nav-bar").removeClass(currentMenuStyle);
+      $("#Layer_1").removeClass(currentMenuStyle);
+      currentMenuStyle = "television";
+      $("#nav-bar").addClass(currentMenuStyle);
+      $("#Layer_1").addClass(currentMenuStyle);
+      currentMenuStyle = "television";
+      // console.log("Menu Style is Television");
+      break;
+    case ($(window).scrollTop() > (sectionTops[2] - topOffset)) && (currentMenuStyle != "game"):
+      $("#nav-bar").removeClass(currentMenuStyle);
+      $("#Layer_1").removeClass(currentMenuStyle);
+      currentMenuStyle = "game";
+      $("#nav-bar").addClass(currentMenuStyle);
+      $("#Layer_1").addClass(currentMenuStyle);
+      currentMenuStyle = "game";
+      // console.log("Menu Style is Game");
+      break;
+  };
+}
+// End Menustyler
+
+// End Functions
+
+// Document Ready --------------------------------------------------------------
 $(function(){
+  // update vars
+  menuAttached = false;                                 // defualt menu state (unattached)
+  skipHeight = $("#nav-bar").position().top;            // get height of nav bar in container
+  menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
+  detachHeightInit = $("#nav-bar").position().top + 1;  // set default for reset
+  currentMenuStyle = "default";
+  sections = [
+    ".films-container",
+    ".television-container",
+    ".game-container"
+  ];
+  sectionTops = [
+    $(sections[0]).position().top, // films section
+    $(sections[1]).position().top,  // television section
+    $(sections[2]).position().top // games section
+  ];
+  // end update vars
+
   // sticker positioning at load
   placeStickers(".sticker-area-album", "music", -60, 60);
   placeStickers(".sticker-area-songs", "music", -60, 60);
   placeStickers(".sticker-area-films", "film",  -10, 10);
   placeStickers(".sticker-area-television", "television",  -10, 10);
   placeStickers(".sticker-area-game", "game",  -10, 10);
-
   // end sticker positioning at load
-  // init doc ready vars
-  var menuAttached = false;                                 // defualt menu state (unattached)
-  var skipHeight = $("#nav-bar").position().top;            // get height of nav bar in container
-  var menuDetachHeight = $("#nav-bar").position().top + 1;  // set default for reset
-  var currentMenuStyle = "default";
-  var sections = [
-    ".films-container",
-    ".television-container",
-    ".game-container"
-  ];
-  var sectionTops = [
-    $(sections[0]).position().top, // films section
-    $(sections[1]).position().top,  // television section
-    $(sections[2]).position().top // games section
-  ];
-  // end init vars
 
-  // begin sticker logic
+  // Sticker updating logic ----------------------------------------------------
+  // click events
   $(window).mousedown(function(){ windowClick = true;   });
   $(window).mouseup(function(){   windowClick = false;  });
 
-  $('.sticker').hover(function(){
+  // hover selecting
+  $(".sticker").hover(function(){
     if(divHover === null){
       divHover = $(this);
     }
@@ -147,85 +259,16 @@ $(function(){
     }
   });
 
+  // move stickers based on offsets based on sticker area + cursor, etc
   $(window).mousemove(function(e){
     if(windowClick && (divHover != null)){
       var areaOffsetY = $(divHover).parent().position().top - $(window).scrollTop(); // correct for combined Y difference of scroll + sticker area
-      var areaOffsetX = $(divHover).parent().offset().left; // this offset corrects for X coord of sticker area
+      var areaOffsetX = $(divHover).parent().offset().left; // this offset corrects for X coord of sticker area, virtually zero
       divHover.css({ top: (e.clientY - divHover.height() / 2) - areaOffsetY + 'px', left: (e.clientX - divHover.width() / 2) - areaOffsetX + 'px', position: 'absolute', zIndex: '1' });
     }
   });
   // end sticker logic
 
-  function menuStyler(section) {
-    var topOffset = $("#nav-bar").outerHeight(); // offset for menu
-    // var topOffset = 0; // TODO
-    switch (true) {
-      case ($(window).scrollTop() < (sectionTops[0] - topOffset)) && (currentMenuStyle != "default"):
-        $("#nav-bar").removeClass(currentMenuStyle);
-        $("#Layer_1").removeClass(currentMenuStyle);
-        currentMenuStyle = "default";
-        $("#nav-bar").addClass(currentMenuStyle);
-        $("#Layer_1").addClass(currentMenuStyle);
-        // console.log("Menu style is default");
-        break;
-      case (($(window).scrollTop() > (sectionTops[0] - topOffset)) && (($(window).scrollTop()) < (sectionTops[1] - topOffset))) && (currentMenuStyle != "films"):
-        $("#nav-bar").removeClass(currentMenuStyle);
-        $("#Layer_1").removeClass(currentMenuStyle);
-        currentMenuStyle = "films";
-        $("#nav-bar").addClass(currentMenuStyle);
-        $("#Layer_1").addClass(currentMenuStyle);
-        // console.log("Menu Style is Films");
-        break;
-        case (($(window).scrollTop() > (sectionTops[1] - topOffset)) && (($(window).scrollTop()) < (sectionTops[2] - topOffset))) && (currentMenuStyle != "television"):
-        $("#nav-bar").removeClass(currentMenuStyle);
-        $("#Layer_1").removeClass(currentMenuStyle);
-        currentMenuStyle = "television";
-        $("#nav-bar").addClass(currentMenuStyle);
-        $("#Layer_1").addClass(currentMenuStyle);
-        currentMenuStyle = "television";
-        // console.log("Menu Style is Television");
-        break;
-      case ($(window).scrollTop() > (sectionTops[2] - topOffset)) && (currentMenuStyle != "game"):
-        $("#nav-bar").removeClass(currentMenuStyle);
-        $("#Layer_1").removeClass(currentMenuStyle);
-        currentMenuStyle = "game";
-        $("#nav-bar").addClass(currentMenuStyle);
-        $("#Layer_1").addClass(currentMenuStyle);
-        currentMenuStyle = "game";
-        // console.log("Menu Style is Game");
-        break;
-    };
-  };
-
-  // begin menu logic
-  function menuScroll() {
-    if (($(window).scrollTop() > skipHeight) && !menuAttached ) {
-      menuDetachHeight = $(window).scrollTop(); // Remember height of menu attach
-
-      $("#nav-bar").addClass("navbar-fixed");
-      $(".media-menu").addClass("attached");
-      $(".spacer").removeClass("hide");
-
-      $(".rotator-container").addClass("menu-attached");
-
-      menuAttached = true; // report menu attached
-      // console.log("Menu attached");
-
-    };
-    if (($(window).scrollTop() < menuDetachHeight) && menuAttached ) {
-      $("#nav-bar").removeClass("navbar-fixed");
-      $(".media-menu").removeClass("attached");
-      $(".spacer").addClass("hide");
-
-      $(".rotator-container").removeClass("menu-attached");
-
-      menuAttached = false; // report menu attached
-      // console.log("Menu default");
-      skipHeight = $("#nav-bar").position().top; // get height of nav bar in container
-    };
-    // menu style update
-
-  };
   // run menuScroll on window scroll
   $(window).scroll(function() {
     menuScroll();
@@ -235,37 +278,8 @@ $(function(){
   // run menuScroll on page load if scrolled beyond detach height
   if ($(window).scrollTop() > skipHeight ) {
     menuScroll();
-    menuDetachHeight = $(".intro").outerHeight() + $(".introspace").outerHeight() // simulate menu height and override default menuScroll behavior as to avoid 'flicker'
-    // console.log($(".intro").outerHeight() + $(".introspace").outerHeight()); debug
     menuStyler();
   };
-// end doc ready
 });
 
-// begin monthbg logic
-// input a month (0-11)
-// match month to img url
-// update bgimg of .month-bg
-var monthBgUrls = [
-"img/monthbg/monthbg-00.jpg",
-"img/monthbg/monthbg-01.jpg",
-"img/monthbg/monthbg-02.jpg",
-"img/monthbg/monthbg-03.jpg",
-"img/monthbg/monthbg-04.jpg",
-"img/monthbg/monthbg-05.jpg",
-"img/monthbg/monthbg-06.jpg",
-"img/monthbg/monthbg-07.jpg",
-"img/monthbg/monthbg-08.jpg",
-"img/monthbg/monthbg-09.jpg",
-"img/monthbg/monthbg-10.jpg",
-"img/monthbg/monthbg-11.jpg"
-];
-
-function monthBgHover(monthIndex) {
-  // debug array
-  // console.log(monthBgUrls[monthIndex]);
-
-  var month = monthBgUrls[monthIndex];
-  $(".month-bg").css('background-image',"url('" + month + "')");
-};
-// end monthbg logic
+// End Doc Ready ---------------------------------------------------------------
