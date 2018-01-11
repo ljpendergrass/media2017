@@ -19,6 +19,10 @@ section.intro
       color: $media-green
 
 section.outro
+  .columns
+    +mobile
+      justify-content: center
+      text-align: center
   font-family: $family-monospace
   margin: 4rem auto
   color: $media-primary
@@ -239,6 +243,6 @@ section.music
 
 .menu-target
   position: relative
-  bottom: calc(60px + 1rem)
+  bottom: calc(60px + 2rem)
   +tablet
     bottom: calc(165px + 1rem)
