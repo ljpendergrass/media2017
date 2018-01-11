@@ -1,11 +1,12 @@
 .rotator-container
-  transition: all .5s
-  position: fixed
+  transition: top .5s, right .5s, padding .5s
+  position: absolute
   top: 12px
   right: 16px
   z-index: 101
   padding: .25rem
   +tablet
+    position: fixed
     top: 20px
     right: 30px
     z-index: 101
@@ -16,12 +17,12 @@
     max-width: 7rem
     max-height: 7rem
     animation: rotate 5s linear infinite
-    transition: all .5s
+    transition: width .5s, height .5s
     +tablet
       width: 150px
       height: 150px
       animation: rotate 5s linear infinite
-      transition: all .5s
+      transition: width .5s, height .5s
 
 .menu-attached
   padding: 1rem

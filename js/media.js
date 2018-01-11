@@ -1,6 +1,7 @@
 // Globalvars ------------------------------------------------------------------
 var divHover = null;     // stickers util
 var windowClick = false;  // stickers util
+var mobileBreakpoint = 768;
 var menuAttached;
 var skipHeight;
 var menuDetachHeight;
@@ -44,12 +45,13 @@ function monthBgHover(monthIndex) {
 // end util
 
 // Spawn stickers function -----------------------------------------------------
-function placeStickers(section, config, minAngle, maxAngle) {
+function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
   var i           = 0;
   var placeY      = 0;
   var sectionXMax = $(section).width();
   var sectionYMax = $(section).height();
   var stickers    = $(section).children();
+  var windowWidth = $(window).width();
   var musicConfig = [ // manual offsets
     (($(stickers[0]).width())/5),
     sectionXMax - (($(stickers[1]).width())*1.25),
@@ -72,7 +74,7 @@ function placeStickers(section, config, minAngle, maxAngle) {
     sectionXMax - (($(stickers[1]).width())+32)     // R
   ];
 
-  if (config === "music"){
+  if ((config === "music") && (windowWidth >= mobileBreakpoint)){
     var stickerOverlap = 100;
     var div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
@@ -85,7 +87,7 @@ function placeStickers(section, config, minAngle, maxAngle) {
       i += 1;
     };
   };
-  if (config === "film"){
+  if ((config === "film") && (windowWidth >= mobileBreakpoint)){
     var stickerOverlap = 400;
     var div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
@@ -104,7 +106,7 @@ function placeStickers(section, config, minAngle, maxAngle) {
       i += 1;
     };
   };
-  if (config === "television"){
+  if ((config === "television") && (windowWidth >= mobileBreakpoint)){
     var stickerOverlap = 230;
     var div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
@@ -121,7 +123,7 @@ function placeStickers(section, config, minAngle, maxAngle) {
       i += 1;
     };
   };
-  if (config === "game"){
+  if ((config === "game") && (windowWidth >= mobileBreakpoint)){
     var stickerOverlap = 150;
     var div = (sectionYMax - stickerOverlap)/6;
     for (stickerIndiv of stickers) {
@@ -135,7 +137,19 @@ function placeStickers(section, config, minAngle, maxAngle) {
         placeY += div;
       };
     };
-  }
+  };
+  if (windowWidth < mobileBreakpoint) {
+    var div = (sectionYMax)/stickerAmount;
+    for (stickerIndiv of stickers) {
+      var stickerWidth  = $(stickerIndiv).width();
+      var stickerHeight = $(stickerIndiv).height();
+      var randomOffsetX = (getRandomInt(-16,16)); // offset X
+      var randomOffsetY = (getRandomInt(-8,8)); // offset Y
+      var randomDeg = getRandomInt(minAngle/3, maxAngle/3);
+      $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: ((sectionXMax/2) - (stickerWidth/2)) + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
+      placeY += (div + (stickerHeight * 1.1))/2;
+    };
+  };
 };
 // end spawn stickers function
 
@@ -178,7 +192,7 @@ function menuUtilities(newStyle){
   $("#nav-bar").addClass(currentMenuStyle);
   $("#Layer_1").addClass(currentMenuStyle);
   $("span."+newStyle).addClass("active");
-  console.log("Menu style is " + newStyle);
+  // console.log("Menu style is " + newStyle);
 }
 // menuUtilities End
 
@@ -189,19 +203,19 @@ function menuStyler(section) {
   switch (true) {
     case ($(window).scrollTop() < (sectionTops[0] - topOffset)) && (currentMenuStyle != "default"):
       menuUtilities("default");
-      console.log("Menu styler fired as default");
+      // console.log("Menu styler fired as default");
       break;
     case (($(window).scrollTop() > (sectionTops[0] - topOffset)) && (($(window).scrollTop()) < (sectionTops[1] - topOffset))) && (currentMenuStyle != "films"):
       menuUtilities("films");
-      console.log("Menu styler fired as films");
+      // console.log("Menu styler fired as films");
       break;
       case (($(window).scrollTop() > (sectionTops[1] - topOffset)) && (($(window).scrollTop()) < (sectionTops[2] - topOffset))) && (currentMenuStyle != "television"):
       menuUtilities("television");
-      console.log("Menu styler fired as television");
+      // console.log("Menu styler fired as television");
       break;
     case ($(window).scrollTop() > (sectionTops[2] - topOffset)) && (currentMenuStyle != "game"):
       menuUtilities("game");
-      console.log("Menu styler fired as game");
+      // console.log("Menu styler fired as game");
       break;
   };
 }
@@ -230,14 +244,12 @@ $(function(){
   // end update vars
 
   // sticker positioning at load
-  if ($(window).width() >= 768){
-    placeStickers(".sticker-area-album", "music", -60, 60);
-    placeStickers(".sticker-area-songs", "music", -60, 60);
-    placeStickers(".sticker-area-films", "film",  -10, 10);
-    placeStickers(".sticker-area-television", "television",  -10, 10);
-    placeStickers(".sticker-area-game", "game",  -10, 10);
-    // end sticker positioning at load
-  };
+  placeStickers(".sticker-area-album",      "music",      8, -60, 60);
+  placeStickers(".sticker-area-songs",      "music",      8, -60, 60);
+  placeStickers(".sticker-area-films",      "film",       8, -10, 10);
+  placeStickers(".sticker-area-television", "television", 7, -10, 10);
+  placeStickers(".sticker-area-game",       "game",       9, -10, 10);
+  // end sticker positioning at load
 
   // Sticker updating logic ----------------------------------------------------
   // click events
