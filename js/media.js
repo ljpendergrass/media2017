@@ -169,44 +169,39 @@ function menuScroll() {
 }
 // End Menu scroll
 
+// menuUtilities Begin
+function menuUtilities(newStyle){
+  $("#nav-bar").removeClass(currentMenuStyle);
+  $("#Layer_1").removeClass(currentMenuStyle);
+  $("span."+currentMenuStyle).removeClass("active");
+  currentMenuStyle = newStyle;
+  $("#nav-bar").addClass(currentMenuStyle);
+  $("#Layer_1").addClass(currentMenuStyle);
+  $("span."+newStyle).addClass("active");
+  console.log("Menu style is " + newStyle);
+}
+// menuUtilities End
+
 // Menustyler
 function menuStyler(section) {
   var topOffset = $("#nav-bar").outerHeight(); // offset for menu
   // var topOffset = 0; // TODO
   switch (true) {
     case ($(window).scrollTop() < (sectionTops[0] - topOffset)) && (currentMenuStyle != "default"):
-      $("#nav-bar").removeClass(currentMenuStyle);
-      $("#Layer_1").removeClass(currentMenuStyle);
-      currentMenuStyle = "default";
-      $("#nav-bar").addClass(currentMenuStyle);
-      $("#Layer_1").addClass(currentMenuStyle);
-      // console.log("Menu style is default");
+      menuUtilities("default");
+      console.log("Menu styler fired as default");
       break;
     case (($(window).scrollTop() > (sectionTops[0] - topOffset)) && (($(window).scrollTop()) < (sectionTops[1] - topOffset))) && (currentMenuStyle != "films"):
-      $("#nav-bar").removeClass(currentMenuStyle);
-      $("#Layer_1").removeClass(currentMenuStyle);
-      currentMenuStyle = "films";
-      $("#nav-bar").addClass(currentMenuStyle);
-      $("#Layer_1").addClass(currentMenuStyle);
-      // console.log("Menu Style is Films");
+      menuUtilities("films");
+      console.log("Menu styler fired as films");
       break;
       case (($(window).scrollTop() > (sectionTops[1] - topOffset)) && (($(window).scrollTop()) < (sectionTops[2] - topOffset))) && (currentMenuStyle != "television"):
-      $("#nav-bar").removeClass(currentMenuStyle);
-      $("#Layer_1").removeClass(currentMenuStyle);
-      currentMenuStyle = "television";
-      $("#nav-bar").addClass(currentMenuStyle);
-      $("#Layer_1").addClass(currentMenuStyle);
-      currentMenuStyle = "television";
-      // console.log("Menu Style is Television");
+      menuUtilities("television");
+      console.log("Menu styler fired as television");
       break;
     case ($(window).scrollTop() > (sectionTops[2] - topOffset)) && (currentMenuStyle != "game"):
-      $("#nav-bar").removeClass(currentMenuStyle);
-      $("#Layer_1").removeClass(currentMenuStyle);
-      currentMenuStyle = "game";
-      $("#nav-bar").addClass(currentMenuStyle);
-      $("#Layer_1").addClass(currentMenuStyle);
-      currentMenuStyle = "game";
-      // console.log("Menu Style is Game");
+      menuUtilities("game");
+      console.log("Menu styler fired as game");
       break;
   };
 }

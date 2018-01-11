@@ -30,14 +30,16 @@ section.outro
     font-size: 8.5rem
 
 section.media-menu
+  // menu items
   &.default
   &.attached
     background: transparentize(black, 0)
     border-bottom: 1px solid $media-primary
   &.films
     background: transparentize($media-primary, 0)
-    color: black
     border-bottom: 1px solid $black
+    span a
+      color: black
     .menuitem
       span.active
         border-bottom: 1px solid $black
@@ -52,15 +54,27 @@ section.media-menu
     background: transparentize($media-green, 0)
     color: $media-blue
     border-bottom: 1px solid $media-blue
+    span a
+      color: $media-blue
     .menuitem
       span.active
         border-bottom: 1px solid $media-blue
 
+  // media menu
+  ul
+    justify-content: center
+    +tablet
+      justify-content: inherit
+  span
+    a
+      color: white
   font-family: $family-monospace
-  padding: 4.375rem 0
+  padding: 2rem 0
   background: black
   background: transparentize(black, 1)
   transition: .25s
+  +tablet
+    padding: 4.375rem 0
 
   .menuitem
     span
@@ -71,6 +85,8 @@ section.media-menu
 
 .introspace
   padding-top: 8rem
+  &#music
+    padding-bottom: 3rem
 
 .navbar-fixed
   top: 0
@@ -85,7 +101,9 @@ section.music
     padding: 25px 35px
 
 .spacer
-  height: 165px
+  height: 90px
+  +tablet
+    height: 165px
   &.hide
     display: none
 
