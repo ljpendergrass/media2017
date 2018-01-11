@@ -1,21 +1,36 @@
 .rotator-container
-  top: 20px
-  right: 30px
-  z-index: 101
-  position: fixed
-  padding: .75rem
   transition: all .5s
+  position: fixed
+  top: 12px
+  right: 16px
+  z-index: 101
+  padding: .25rem
+  +tablet
+    top: 20px
+    right: 30px
+    z-index: 101
+    padding: .75rem
   img, svg, rotato
-    width: 150px
-    height: 150px
+    width: 20vw
+    height: 20vw
+    max-width: 7rem
+    max-height: 7rem
     animation: rotate 5s linear infinite
     transition: all .5s
+    +tablet
+      width: 150px
+      height: 150px
+      animation: rotate 5s linear infinite
+      transition: all .5s
 
 .menu-attached
   padding: 1rem
   img, svg, rotato
-    width: 100px
-    height: 100px
+    display: none
+    +tablet
+      display: block
+      width: 100px
+      height: 100px
 
 .films
   background: transparent
