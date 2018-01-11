@@ -75,7 +75,7 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
   ];
 
   if ((config === "music") && (windowWidth >= mobileBreakpoint)){
-    var stickerOverlap = 100;
+    var stickerOverlap = 40;
     var div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
@@ -83,7 +83,7 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
       var randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset Y by an even smaller amount
       var randomDeg = getRandomInt(minAngle, maxAngle);
       $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
-      placeY += div;
+      placeY += div - stickerOverlap;
       i += 1;
     };
   };
@@ -107,7 +107,7 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
     };
   };
   if ((config === "television") && (windowWidth >= mobileBreakpoint)){
-    var stickerOverlap = 230;
+    var stickerOverlap = 260;
     var div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
       var stickerWidth  = $(stickerIndiv).width();
@@ -144,10 +144,10 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
       var stickerWidth  = $(stickerIndiv).width();
       var stickerHeight = $(stickerIndiv).height();
       var randomOffsetX = (getRandomInt(-16,16)); // offset X
-      var randomOffsetY = (getRandomInt(-8,8)); // offset Y
+      var randomOffsetY = (getRandomInt(-8,2)); // offset Y
       var randomDeg = getRandomInt(minAngle/3, maxAngle/3);
       $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: ((sectionXMax/2) - (stickerWidth/2)) + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
-      placeY += (div + (stickerHeight * 1.1))/2;
+      placeY += ((div + (stickerHeight))/2);
     };
   };
 };

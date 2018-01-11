@@ -22,15 +22,17 @@
 
 .sticker-area
   overflow-x: hidden
+  +desktop
+    overflow: visible
   // height fudge in combination with sticker overlap set in JS
   &.sticker-area-album
-    min-height: calc( 60vh * 8.2 )
+    min-height: calc( 60vh * 7 )
     +desktop
-      min-height: calc( 400vh - 1200px )
+      min-height: calc( 400vh - 1000px )
   &.sticker-area-songs
-    min-height: calc( 60vh * 8.5 )
+    min-height: calc( 60vh * 7.2 )
     +desktop
-      min-height: calc( 400vh - 1200px )
+      min-height: calc( 400vh - 1000px )
   &.sticker-area-films
     min-height: calc( 100vh * 8.2 )
     +desktop
@@ -40,7 +42,7 @@
   &.sticker-area-television
     min-height: calc( 85vh * 7.2 )
     +desktop
-      min-height: calc( 400vh - 900px )
+      min-height: calc( 400vh - 1200px )
   &.sticker-area-game
     min-height: calc( 70vh * 9.2 )
     +desktop
