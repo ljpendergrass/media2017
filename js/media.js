@@ -147,7 +147,7 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
       var randomOffsetY = (getRandomInt(-8,2)); // offset Y
       var randomDeg = getRandomInt(minAngle/3, maxAngle/3);
       $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: ((sectionXMax/2) - (stickerWidth/2)) + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
-      placeY += ((div + (stickerHeight))/2);
+      placeY += ((div + div + (stickerHeight))/3);
     };
   };
 };
