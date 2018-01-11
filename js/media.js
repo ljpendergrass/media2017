@@ -230,12 +230,14 @@ $(function(){
   // end update vars
 
   // sticker positioning at load
-  placeStickers(".sticker-area-album", "music", -60, 60);
-  placeStickers(".sticker-area-songs", "music", -60, 60);
-  placeStickers(".sticker-area-films", "film",  -10, 10);
-  placeStickers(".sticker-area-television", "television",  -10, 10);
-  placeStickers(".sticker-area-game", "game",  -10, 10);
-  // end sticker positioning at load
+  if ($(window).width() >= 768){
+    placeStickers(".sticker-area-album", "music", -60, 60);
+    placeStickers(".sticker-area-songs", "music", -60, 60);
+    placeStickers(".sticker-area-films", "film",  -10, 10);
+    placeStickers(".sticker-area-television", "television",  -10, 10);
+    placeStickers(".sticker-area-game", "game",  -10, 10);
+    // end sticker positioning at load
+  };
 
   // Sticker updating logic ----------------------------------------------------
   // click events
