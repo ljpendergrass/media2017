@@ -1,4 +1,5 @@
 .rotator-container
+  z-index: 202
   transition: all .75s
   position: absolute
   top: 12px
@@ -9,11 +10,12 @@
   height: 150px
   +tablet
     position: fixed
-    top: 20px
+    top: 30px
     right: 30px
     z-index: 101
     padding: .75rem
   img, svg
+    z-index: 202
     transition: all .75s
     position: absolute
     width: 20vw
@@ -38,7 +40,8 @@
       transition: all .75s
       top: calc(50% - 75px)
       right: calc(50% - 75px)
-
+      .cls-1
+        fill: white
 
 .menu-attached
   padding: 1rem
