@@ -3,3 +3,7 @@ asset/*
 bulma/bulma\.min\.css
 
 bulma/bulma\.min\.css\.map
+static/*
+
+.sass-cache/*
+node_modules/*

@@ -1,0 +1,11 @@
+{
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-processhtml": "^0.4.1",
+    "grunt-uncss": "^0.8.0"
+  }
+}
