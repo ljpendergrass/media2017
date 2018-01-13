@@ -1,15 +1,15 @@
 // Globalvars ------------------------------------------------------------------
-var divHover = null;     // stickers util
-var windowClick = false;  // stickers util
-var mobileBreakpoint = 768;
-var menuAttached;
-var skipHeight;
-var menuDetachHeight;
-var currentMenuStyle;
-var sections = [];
-var sectionTops = [];
-var menuClick;
-var monthBgUrls = [
+let divHover = null;     // stickers util
+let windowClick = false;  // stickers util
+const mobileBreakpoint = 768;
+let menuAttached;
+let skipHeight;
+let menuDetachHeight;
+let currentMenuStyle;
+let sections = [];
+let sectionTops = [];
+let menuClick;
+const monthBgUrls = [
 "img/monthbg/monthbg-00.jpg",
 "img/monthbg/monthbg-01.jpg",
 "img/monthbg/monthbg-02.jpg",
@@ -39,20 +39,20 @@ function getRandomInt(min, max) {
 
 // Month hover event
 function monthBgHover(monthIndex) {
-  var month = monthBgUrls[monthIndex];
+  let month = monthBgUrls[monthIndex];
   $(".month-bg").css("background-image","url('" + month + "')");
 }
 // end util
 
 // Spawn stickers function -----------------------------------------------------
 function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
-  var i           = 0;
-  var placeY      = 0;
-  var sectionXMax = $(section).width();
-  var sectionYMax = $(section).height();
-  var stickers    = $(section).children();
-  var windowWidth = $(window).width();
-  var musicConfig = [ // manual offsets
+  let i           = 0;
+  let placeY      = 0;
+  let sectionXMax = $(section).width();
+  let sectionYMax = $(section).height();
+  let stickers    = $(section).children();
+  let windowWidth = $(window).width();
+  let musicConfig = [ // manual offsets
     (($(stickers[0]).width())/5),
     sectionXMax - (($(stickers[1]).width())*1.25),
     (sectionXMax/2) - (($(stickers[2]).width())/2),
@@ -62,7 +62,7 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
     (($(stickers[6]).width())/5),
     sectionXMax - (($(stickers[7]).width())*1.25)
   ];
-  var gameConfig = [ // manual offsets
+  let gameConfig = [ // manual offsets
     (sectionXMax/2) - (($(stickers[2]).width())/2), // Center
     32,                                             // Left
     sectionXMax - (($(stickers[1]).width())+32),    // Right
@@ -75,30 +75,31 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
   ];
 
   if ((config === "music") && (windowWidth >= mobileBreakpoint)){
-    var stickerOverlap = 40;
-    var div = (sectionYMax - stickerOverlap)/(stickers.length);
+    let stickerOverlap = 40;
+    let div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
-      var stickerWidth  = $(stickerIndiv).width();
-      var randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4))); // offset X by a quarter of sticker size
-      var randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset Y by an even smaller amount
-      var randomDeg = getRandomInt(minAngle, maxAngle);
+      let stickerWidth  = $(stickerIndiv).width();
+      let randomOffsetX = (getRandomInt(-(stickerWidth/4),(stickerWidth/4))); // offset X by a quarter of sticker size
+      let randomOffsetY = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset Y by an even smaller amount
+      let randomDeg = getRandomInt(minAngle, maxAngle);
       $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
       placeY += div - stickerOverlap;
       i += 1;
     };
   };
   if ((config === "film") && (windowWidth >= mobileBreakpoint)){
-    var stickerOverlap = 400;
-    var div = (sectionYMax - stickerOverlap)/(stickers.length);
+    let stickerOverlap = 400;
+    let div = (sectionYMax - stickerOverlap)/(stickers.length);
+    let alignx = 16;
     for (stickerIndiv of stickers) {
-      var stickerWidth  = $(stickerIndiv).width();
-      var randomOffsetX = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset X
-      var randomDeg     = getRandomInt(minAngle, maxAngle);
+      let stickerWidth  = $(stickerIndiv).width();
+      let randomOffsetX = (getRandomInt(-(stickerWidth/9),(stickerWidth/9))); // offset X
+      let randomDeg     = getRandomInt(minAngle, maxAngle);
 
       if ((i === 0) || ((i%2) === 0)){
-        var alignX = 16;
+        alignX = 16;
       } else {
-        var alignX = sectionXMax - $(stickerIndiv).width(); // alignment is right with 1/9th additional space
+        alignX = sectionXMax - $(stickerIndiv).width(); // alignment is right with 1/9th additional space
       };
 
       $(stickerIndiv).css({ top: placeY + "px", left: alignX + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
@@ -107,13 +108,13 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
     };
   };
   if ((config === "television") && (windowWidth >= mobileBreakpoint)){
-    var stickerOverlap = 260;
-    var div = (sectionYMax - stickerOverlap)/(stickers.length);
+    let stickerOverlap = 260;
+    let div = (sectionYMax - stickerOverlap)/(stickers.length);
     for (stickerIndiv of stickers) {
-      var stickerWidth  = $(stickerIndiv).width();
-      var randomOffsetX = (getRandomInt(-16,16)); // offset X by a quarter of sticker size
-      var randomOffsetY = (getRandomInt(-16,16)); // offset Y by an even smaller amount
-      var randomDeg = getRandomInt(minAngle, maxAngle);
+      let stickerWidth  = $(stickerIndiv).width();
+      let randomOffsetX = (getRandomInt(-16,16)); // offset X by a quarter of sticker size
+      let randomOffsetY = (getRandomInt(-16,16)); // offset Y by an even smaller amount
+      let randomDeg = getRandomInt(minAngle, maxAngle);
       if (i === 6) {
         $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: musicConfig[3] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
       } else {
@@ -124,13 +125,13 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
     };
   };
   if ((config === "game") && (windowWidth >= mobileBreakpoint)){
-    var stickerOverlap = 150;
-    var div = (sectionYMax - stickerOverlap)/6;
+    let stickerOverlap = 150;
+    let div = (sectionYMax - stickerOverlap)/6;
     for (stickerIndiv of stickers) {
-      var stickerWidth  = $(stickerIndiv).width();
-      var randomOffsetX = (getRandomInt(-16,16)); // offset X
-      var randomOffsetY = (getRandomInt(-16,16)); // offset Y
-      var randomDeg = getRandomInt(minAngle, maxAngle);
+      let stickerWidth  = $(stickerIndiv).width();
+      let randomOffsetX = (getRandomInt(-16,16)); // offset X
+      let randomOffsetY = (getRandomInt(-16,16)); // offset Y
+      let randomDeg = getRandomInt(minAngle, maxAngle);
       $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: gameConfig[i] + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
       i += 1;
       if (((i+1) % 3) != 0) {
@@ -139,13 +140,13 @@ function placeStickers(section, config, stickerAmount, minAngle, maxAngle) {
     };
   };
   if (windowWidth < mobileBreakpoint) {
-    var div = (sectionYMax)/stickerAmount;
+    let div = (sectionYMax)/stickerAmount;
     for (stickerIndiv of stickers) {
-      var stickerWidth  = $(stickerIndiv).width();
-      var stickerHeight = $(stickerIndiv).height();
-      var randomOffsetX = (getRandomInt(-16,16)); // offset X
-      var randomOffsetY = (getRandomInt(-8,2)); // offset Y
-      var randomDeg = getRandomInt(minAngle/3, maxAngle/3);
+      let stickerWidth  = $(stickerIndiv).width();
+      let stickerHeight = $(stickerIndiv).height();
+      let randomOffsetX = (getRandomInt(-16,16)); // offset X
+      let randomOffsetY = (getRandomInt(-8,2)); // offset Y
+      let randomDeg = getRandomInt(minAngle/3, maxAngle/3);
       $(stickerIndiv).css({ top: placeY + randomOffsetY + "px", left: ((sectionXMax/2) - (stickerWidth/2)) + randomOffsetX + "px", transform: "rotate(" + randomDeg + "deg)"});
       placeY += ((div + div + (stickerHeight))/3);
     };
@@ -198,8 +199,8 @@ function menuUtilities(newStyle){
 
 // Menustyler
 function menuStyler(section) {
-  var topOffset = $("#nav-bar").outerHeight(); // offset for menu
-  // var topOffset = 0; // TODO
+  let topOffset = $("#nav-bar").outerHeight(); // offset for menu
+  // let topOffset = 0; // TODO
   switch (true) {
     case ($(window).scrollTop() < (sectionTops[0] - topOffset)) && (currentMenuStyle != "default"):
       menuUtilities("default");
@@ -271,8 +272,8 @@ $(function(){
   // move stickers based on offsets based on sticker area + cursor, etc
   $(window).mousemove(function(e){
     if(windowClick && (divHover != null)){
-      var areaOffsetY = $(divHover).parent().position().top - $(window).scrollTop(); // correct for combined Y difference of scroll + sticker area
-      var areaOffsetX = $(divHover).parent().offset().left; // this offset corrects for X coord of sticker area, virtually zero
+      let areaOffsetY = $(divHover).parent().position().top - $(window).scrollTop(); // correct for combined Y difference of scroll + sticker area
+      let areaOffsetX = $(divHover).parent().offset().left; // this offset corrects for X coord of sticker area, virtually zero
       divHover.css({ top: (e.clientY - divHover.height() / 2) - areaOffsetY + 'px', left: (e.clientX - divHover.width() / 2) - areaOffsetX + 'px', position: 'absolute', zIndex: '1' });
     }
   });
