@@ -1,3 +1,8 @@
+$(window).on('load', function() {
+  $(".rotator-container").delay(400).removeClass("unload");
+  $(".curtain").delay(400).fadeOut(400);
+})
+
 // Globalvars ------------------------------------------------------------------
 let divHover = null;     // stickers util
 let windowClick = false;  // stickers util
