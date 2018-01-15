@@ -23,7 +23,22 @@ module.exports = function(grunt) {
     },
     uncss: {
       options: {
-            report: ['min']
+        ignore: [
+          '.attached',
+          'section.media-menu.attached',
+          '.navbar-fixed',
+          '.menu-attached',
+          '.hide',
+          '.films',
+          'section.media-menu.films',
+          'section.media-menu.television',
+          '.television',
+          'section.media-menu.game',
+          'section.media-menu.game span a',
+
+          '.game'
+        ],
+        report: ['min']
         },
       dist: {
         files: {
