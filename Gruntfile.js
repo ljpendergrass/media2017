@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     sass: {                              // Task
       dist: {                            // Target
         options: {                       // Target options
-          style: 'compressed'
+          style: 'expanded'
         },
         files: {                         // Dictionary of files
           'static/css/main.min.css': 'bulma/bulma.sass'       // 'destination': 'source'
@@ -22,9 +22,12 @@ module.exports = function(grunt) {
       }
     },
     uncss: {
+      options: {
+            report: ['min']
+        },
       dist: {
         files: {
-          'static/css/main.min.css': ['index.html']
+          'static/css/main.min.css': ['static/index.html']
         }
       }
     },
@@ -34,6 +37,13 @@ module.exports = function(grunt) {
           'static/index.html': ['index.html']
         }
       }
+    },
+    copy: {
+      main: {
+        expand: true,
+        src: 'js/*',
+        dest: 'static/',
+      },
     }
   });
 
@@ -41,12 +51,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-uncss');
   grunt.loadNpmTasks('grunt-processhtml');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task.
   // Compile sass big.
   // UNCSS and minify.
   // Stash in Static.
   // Update HTML to use new minified CSS and stash in static.
-  grunt.registerTask('default', ['sass', 'uncss', 'processhtml']);
+  grunt.registerTask('default', ['sass', 'processhtml', 'uncss','copy']);
 
 };
