@@ -35,7 +35,14 @@ module.exports = function(grunt) {
           '.television',
           'section.media-menu.game',
           'section.media-menu.game span a',
-
+          'section.media-menu.films .menuitem span.active',
+          'section.media-menu.game .menuitem span.active',
+          '.menu-attached img, .menu-attached svg, .menu-attached rotato',
+          '.cls-1',
+          '.game .cls-1',
+          '.television .cls-1',
+          '.films .cls-1',
+          'section.media-menu.films span a',
           '.game'
         ],
         report: ['min']
