@@ -1,6 +1,8 @@
 $(window).on("load", function() {
   $(".rotator-container").delay(400).removeClass("unload");
   $(".curtain").delay(400).fadeOut(400);
+  skipHeight = $("#nav-bar").position().top;            // get height of nav bar in container
+  
 });
 
 // Globalvars ------------------------------------------------------------------
