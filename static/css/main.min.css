@@ -197,6 +197,10 @@ span {
 .is-uppercase {
   text-transform: uppercase !important;
 }
+
+.has-text-white {
+  color: white !important;
+}
 @media screen and (max-width: 1023px) {
   .is-hidden-touch {
     display: none !important;
@@ -241,6 +245,9 @@ section.outro h2 {
 section.outro h1 {
   padding-top: 0;
   font-size: 8.5rem;
+}
+section.outro a {
+  color: #f4a589;
 }
 
 section.media-menu {
