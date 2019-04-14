@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=`cat .deploypath`
+    - /bin/cp -R images $DEPLOYPATH
