@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/qsafhebj/public_html/
-    - /bin/touch ${DEPLOYPATH}/.helloworld
+    - /bin/cp -Ru static $DEPLOYPATH
