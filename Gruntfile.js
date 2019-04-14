@@ -66,6 +66,16 @@ module.exports = function(grunt) {
         src: 'js/*',
         dest: 'static/',
       },
+    },
+    cacheBust: {
+    taskName: {
+        options: {
+            baseDir: 'static/',
+            assets: ['js/**', 'css/**'],
+            queryString: true
+        },
+        src: ['static/index.html']
+      }
     }
   });
 
@@ -74,12 +84,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-uncss');
   grunt.loadNpmTasks('grunt-processhtml');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-cache-bust');
 
   // Default task.
   // Compile sass big.
   // UNCSS and minify.
   // Stash in Static.
   // Update HTML to use new minified CSS and stash in static.
-  grunt.registerTask('default', ['sass', 'processhtml', 'uncss','copy']);
+  grunt.registerTask('default', ['sass', 'processhtml', 'uncss', 'copy', 'cacheBust' ]);
 
 };
