@@ -631,37 +631,37 @@ section.media-menu .menuitem span.active {
   max-width: calc(25vmax - 50px);
   min-width: 280px;
 }
-.button.is-focused:not(:active) {
+.button:focus:not(:active), .button.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
 }
-.button.is-white.is-focused:not(:active) {
+.button.is-white:focus:not(:active), .button.is-white.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(255, 255, 255, 0.25);
 }
-.button.is-black.is-focused:not(:active) {
+.button.is-black:focus:not(:active), .button.is-black.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(0, 0, 0, 0.25);
 }
-.button.is-light.is-focused:not(:active) {
+.button.is-light:focus:not(:active), .button.is-light.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(245, 245, 245, 0.25);
 }
-.button.is-dark.is-focused:not(:active) {
+.button.is-dark:focus:not(:active), .button.is-dark.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(54, 54, 54, 0.25);
 }
-.button.is-primary.is-focused:not(:active) {
+.button.is-primary:focus:not(:active), .button.is-primary.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
 }
-.button.is-link.is-focused:not(:active) {
+.button.is-link:focus:not(:active), .button.is-link.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
 }
-.button.is-info.is-focused:not(:active) {
+.button.is-info:focus:not(:active), .button.is-info.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(32, 156, 238, 0.25);
 }
-.button.is-success.is-focused:not(:active) {
+.button.is-success:focus:not(:active), .button.is-success.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(35, 209, 96, 0.25);
 }
-.button.is-warning.is-focused:not(:active) {
+.button.is-warning:focus:not(:active), .button.is-warning.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(255, 221, 87, 0.25);
 }
-.button.is-danger.is-focused:not(:active) {
+.button.is-danger:focus:not(:active), .button.is-danger.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(255, 56, 96, 0.25);
 }
 
