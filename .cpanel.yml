@@ -1,6 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=`cat /.deploypath`
-    - /bin/touch .helloworld
-    - touch .helloworld
+    - export DEPLOYPATH=/home/qsafhebj/public_html/
+    - /bin/touch ${DEPLOYPATH}/.helloworld
