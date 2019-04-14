@@ -10,3 +10,7 @@ All media imagery is owned by their respective copyright holders.
 Designed by [Alec Whitmore](http://www.alec-whitmore.com/).
 
 Coded and developed by [Logan Pendergrass](http://www.loganpendergrass.com).
+
+`npm install` to set up
+
+`grunt` to output everything necessary to the `static` folder
