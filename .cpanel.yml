@@ -2,5 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=`cat /.deploypath`
-    - /bin/touch $DEPLOYPATH/.helloworld
-    - touch $DEPLOYPATH/.helloworld
+    - /bin/touch .helloworld
+    - touch .helloworld
