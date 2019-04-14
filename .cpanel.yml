@@ -1,5 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=`cat .deploypath`
-    - /bin/cp -R images $DEPLOYPATH
+    - export DEPLOYPATH=`cat /.deploypath`
+    - /bin/touch $DEPLOYPATH/.helloworld
+    - touch $DEPLOYPATH/.helloworld
