@@ -62,13 +62,14 @@ module.exports = function(grunt) {
     },
     copy: {
       main: {
-        expand: true,
-        src: 'js/*',
-        dest: 'static/',
+        files: [
+          {expand: true, src: ['img/**'], dest: 'static/'},
+          {expand: true, src: ['js/*'], dest: 'static/'},
+        ],
       },
     },
     cacheBust: {
-    taskName: {
+    main: {
         options: {
             baseDir: 'static/',
             assets: ['js/**', 'css/**'],
