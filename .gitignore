@@ -8,3 +8,4 @@ bulma/bulma\.min\.css\.map
 node_modules/*
 
 static/*
+static/**
