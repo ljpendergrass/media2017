@@ -8,6 +8,10 @@ $(window).on("load", function() {
 // Globalvars ------------------------------------------------------------------
 let divHover = null;     // stickers util
 let windowClick = false;  // stickers util
+let lastPos = {};
+let lastDiv;
+let deltaX;
+let deltaY;
 const mobileBreakpoint = 768;
 let menuAttached;
 let skipHeight;
@@ -231,6 +235,7 @@ function menuStyler(section) {
 
 // End Functions
 
+
 // Document Ready --------------------------------------------------------------
 $(function(){
   // update vars
@@ -265,12 +270,12 @@ $(function(){
   $(window).mouseup(function(){   windowClick = false;  });
 
   // hover selecting
-  $(".sticker").hover(function(){
+  $(".sticker").hover(function(){ // handlerIn
     if(divHover === null){
       divHover = $(this);
-    }
+    };
   }, function(){
-    if(windowClick === false){
+    if(windowClick === false){ // handlerOut
       divHover = null;
       $(this).css("z-index", "0");
     }
@@ -279,10 +284,26 @@ $(function(){
   // move stickers based on offsets based on sticker area + cursor, etc
   $(window).mousemove(function(e){
     if(windowClick && (divHover != null)){
-      let areaOffsetY = $(divHover).parent().position().top - $(window).scrollTop(); // correct for combined Y difference of scroll + sticker area
-      let areaOffsetX = $(divHover).parent().offset().left; // this offset corrects for X coord of sticker area, virtually zero
-      divHover.css({ top: (e.clientY - divHover.height() / 2) - areaOffsetY + 'px', left: (e.clientX - divHover.width() / 2) - areaOffsetX + 'px', position: 'absolute', zIndex: '1' });
-    }
+      if ((typeof(lastDiv) != 'undefined') && (lastDiv != divHover)){
+        lastPos.x = e.clientX;
+        lastPos.y = e.clientY;
+      };
+      if (typeof(lastPos.x) != 'undefined') {
+        deltaX = lastPos.x - e.clientX;
+        deltaY = lastPos.y - e.clientY;
+        let currentPos = {
+          x: parseInt(divHover.css("left").substring(0, divHover.css("left").length - 2)),
+          y: parseInt(divHover.css("top").substring(0, divHover.css("top").length - 2))
+        };
+        divHover.css({
+          top:  (currentPos.y - deltaY) + 'px',
+          left: (currentPos.x - deltaX) + 'px',
+          position: 'absolute', zIndex: '1' });
+      };
+    };
+    lastPos.x = e.clientX;
+    lastPos.y = e.clientY;
+    lastDiv = divHover;
   });
   // end sticker logic
 
